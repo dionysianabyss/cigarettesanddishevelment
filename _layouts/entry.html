@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="card" itemscope itemtype="https://schema.org/Article">
+  <header>
+    <h1 itemprop="headline">{{ page.title }}</h1>
+    <p class="meta">
+      {% if page.date %}{{ page.date | date: "%b %d, %Y" }}{% endif %}
+      {% if page.author %} • {{ page.author }}{% endif %}
+    </p>
+    {% if page.summary %}<p class="excerpt">{{ page.summary }}</p>{% endif %}
+  </header>
+  <div class="content" itemprop="articleBody">
+    {{ content }}
+  </div>
+</article>
+

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d0d10" />
+    <title>{% if page.title %}{{ page.title }} — {% endif %}Cigarettes &amp; Dishevelment</title>
+    <meta name="description" content="{{ page.summary | default: site.description }}" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="header wrap">
+      <div class="brand"><a href="/">C&amp;D</a></div>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/essays.html">Essays</a>
+        <a href="/books.html">Books</a>
+        <a href="/concepts.html">Concepts</a>
+        <a href="/immaturity.html">Immaturity</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="wrap" role="main">
+      {{ content }}
+    </main>
+
+    <footer class="wrap footer">© {{ site.time | date: '%Y' }} — Cigarettes &amp; Dishevelment</footer>
+  </body>
+</html>
+

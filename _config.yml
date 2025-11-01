@@ -1,0 +1,53 @@
+title: "Cigarettes & Dishevelment"
+description: "Fragments of thought, ash, and ink."
+permalink: pretty
+timezone: Etc/UTC
+
+collections:
+  essays:
+    output: true
+    permalink: /essays/:slug/
+  books:
+    output: true
+    permalink: /books/:slug/
+  concepts:
+    output: true
+    permalink: /concepts/:slug/
+  immaturity:
+    output: true
+    permalink: /immaturity/:slug/
+  about:
+    output: true
+    permalink: /about/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: essays
+    values:
+      layout: entry
+  - scope:
+      path: ""
+      type: books
+    values:
+      layout: entry
+  - scope:
+      path: ""
+      type: concepts
+    values:
+      layout: entry
+  - scope:
+      path: ""
+      type: immaturity
+    values:
+      layout: entry
+  - scope:
+      path: ""
+      type: about
+    values:
+      layout: entry
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
