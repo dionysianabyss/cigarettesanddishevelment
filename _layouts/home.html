@@ -1,0 +1,66 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <canvas id="fog-canvas" class="fog" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;"></canvas>
+  <div class="hero-inner">
+    <h1 class="title">{{ site.title }}</h1>
+    <div class="subtitle">{{ site.description }}</div>
+    <div id="rotating-tagline" class="tagline" data-taglines="{{ page.taglines | jsonify | escape }}">
+      {{ page.taglines | first }}
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <h3 class="section-title">Latest</h3>
+  <div class="grid">
+    {% assign latest_essay = site.essays | sort: 'date' | reverse | first %}
+    {% if latest_essay %}
+    <a class="card" href="{{ latest_essay.url | relative_url }}">
+      {% assign eimg = latest_essay.image | default: latest_essay.cover_image %}
+      {% if eimg %}
+        <div class="card-cover" style="background-image:url('{{ eimg | relative_url }}')"></div>
+      {% else %}
+        {% capture ph %}{% include ph_url.html id=latest_essay.url %}{% endcapture %}
+        <div class="card-cover" style="background-image:url('{{ ph | strip }}')"></div>
+      {% endif %}
+      <div class="card-body">
+        <div class="card-title">{{ latest_essay.name | default: latest_essay.title | default: latest_essay.slug | replace: '-', ' ' | capitalize }}</div>
+        <div class="card-excerpt">{{ latest_essay.excerpt }}</div>
+      </div>
+    </a>
+    {% endif %}
+
+    {% assign latest_post = site.posts | first %}
+    {% if latest_post %}
+    <a class="card" href="{{ latest_post.url | relative_url }}">
+      {% assign pimg = latest_post.image %}
+      {% if pimg %}
+        <div class="card-cover" style="background-image:url('{{ pimg | relative_url }}')"></div>
+      {% else %}
+        {% capture ph %}{% include ph_url.html id=latest_post.url %}{% endcapture %}
+        <div class="card-cover" style="background-image:url('{{ ph | strip }}')"></div>
+      {% endif %}
+      <div class="card-body">
+        <div class="card-title">{{ latest_post.name | default: latest_post.title | default: latest_post.slug | replace: '-', ' ' | capitalize }}</div>
+        <div class="card-excerpt">{{ latest_post.summary | default: latest_post.excerpt }}</div>
+      </div>
+    </a>
+    {% endif %}
+
+    {% assign latest_book = site.books | sort: 'date' | reverse | first %}
+    {% if latest_book %}
+    <a class="card" href="{{ latest_book.url | relative_url }}">
+      <div class="card-cover" style="background-image:url('{{ latest_book.cover_image | default: '/assets/uploads/placeholder.jpg' | relative_url }}')"></div>
+      <div class="card-body">
+        <div class="card-title">{{ latest_book.title }}</div>
+        <div class="card-excerpt">{{ latest_book.author }} · {{ latest_book.year }}</div>
+      </div>
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+<script src="{{ '/assets/js/fog.js' | relative_url }}" defer></script>

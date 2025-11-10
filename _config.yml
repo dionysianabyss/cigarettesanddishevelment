@@ -1,0 +1,71 @@
+title: "Cigarettes & Dishevelment"
+description: "Philosophy dressed in cigarettes and heartbreak."
+url: "" # set your production URL (e.g., https://username.github.io)
+baseurl: "" # set if using a project site (e.g., /cigarettesanddishevelment)
+
+permalink: pretty
+markdown: kramdown
+kramdown:
+  input: GFM
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+collections:
+  essays:
+    output: true
+    permalink: /essays/:name/
+  books:
+    output: true
+    permalink: /books/:name/
+  concepts:
+    output: true
+    permalink: /concepts/:name/
+  values:
+    output: true
+    permalink: /values/:name/
+  authors:
+    output: true
+    permalink: /authors/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: essays
+    values:
+      layout: essay
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: books
+    values:
+      layout: book
+  - scope:
+      path: ""
+      type: concepts
+    values:
+      layout: concept
+  - scope:
+      path: ""
+      type: values
+    values:
+      layout: value
+  - scope:
+      path: ""
+      type: authors
+    values:
+      layout: author
+
+exclude:
+  - node_modules
+  - vendor
+  - README.md

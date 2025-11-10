@@ -1,0 +1,18 @@
+---
+layout: default
+title: Posts
+permalink: /posts/
+search_exclude: true
+---
+<h1>Posts</h1>
+<div>
+  {% assign items = site.posts %}
+  {% for p in items %}
+  <article style="margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.06)">
+    <h3 style="margin:0"><a href="{{ p.url | relative_url }}">{{ p.name | default: p.title | default: p.slug | replace: '-', ' ' | capitalize }}</a></h3>
+    <div class="meta"><span>{{ p.date | date: '%B %d, %Y' }}</span>{% if p.tags %}<span>•</span><span>Tags: {% for t in p.tags %}<span class='tag'>{% if t.tag %}{{ t.tag }}{% else %}{{ t }}{% endif %}</span>{% endfor %}</span>{% endif %}</div>
+    {% if p.summary %}<p class="muted">{{ p.summary }}</p>{% else %}{{ p.excerpt }}{% endif %}
+  </article>
+  {% endfor %}
+  {% if items == empty %}<p class="muted">No posts yet.</p>{% endif %}
+</div>

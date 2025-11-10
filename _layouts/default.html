@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
+    <div class="grain-layer" aria-hidden="true"></div>
+    {% include header.html %}
+    <main class="container content wikicontent">
+      {{ content }}
+    </main>
+    {% include footer.html %}
+
+    <script src="{{ '/assets/js/wikilinks.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>
+  </body>
+  </html>

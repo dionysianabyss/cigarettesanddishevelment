@@ -1,0 +1,47 @@
+---
+layout: null
+permalink: /search.json
+---
+{
+  "items": [
+  {%- assign all = '' | split: '' -%}
+  {%- assign essays = site.essays -%}
+  {%- assign posts = site.posts -%}
+  {%- assign books = site.books -%}
+  {%- assign concepts = site.concepts -%}
+  {%- assign values = site.values -%}
+  {%- assign authors = site.authors -%}
+  {%- assign pages_all = site.pages -%}
+  {%- assign pages = pages_all | where_exp:'p','p.search_exclude != true and p.url != "/" and p.url != "/search/"' -%}
+  {%- assign collections = essays | concat: posts | concat: books | concat: concepts | concat: values | concat: authors | concat: pages -%}
+  {%- for p in collections -%}
+    {
+      "title": {{ p.name | default: p.title | default: p.concept | default: p.system_name | default: p.slug | jsonify }},
+      "url": {{ p.url | relative_url | jsonify }},
+      "type": "{{ p.collection | default: 'pages' }}",
+      "date": {{ p.date | date_to_xmlschema | jsonify }},
+      "excerpt": {{ p.excerpt | default: p.summary | default: p.definition | markdownify | strip_html | strip_newlines | truncate: 200 | jsonify }},
+      "content": {{ p.content | markdownify | strip_html | strip_newlines | truncate: 400 | jsonify }},
+      "meta": {{
+        '' | append: ' ' | append: p.author | append: ' ' | append: p.discipline | append: ' ' | append: p.isbn | append: ' ' |
+        append: p.definition | append: ' ' | append: p.interpretation |
+        append: ' ' | append: (p.tags | join: ' ') |
+        append: ' ' | append: (p.influenced_by | join: ' ') |
+        append: ' ' | append: (p.influenced_by | map: 'name' | join: ' ') |
+        append: ' ' | append: (p.quotes | join: ' ') |
+        append: ' ' | append: (p.quotes | map: 'quote' | join: ' ') |
+        append: ' ' | append: (p.interpretations | map: 'philosopher' | join: ' ') |
+        append: ' ' | append: (p.interpretations | map: 'interpretation_text' | join: ' ') |
+        append: ' ' | append: (p.chapters | map: 'chapter' | join: ' ') |
+        append: ' ' | append: (p.chapters | map: 'notes' | join: ' ') |
+        append: ' ' | append: (p.virtues | join: ' ') |
+        append: ' ' | append: (p.virtues | map: 'virtue' | join: ' ') |
+        append: ' ' | append: (p.principles | join: ' ') |
+        append: ' ' | append: (p.principles | map: 'principle' | join: ' ') |
+        append: ' ' | append: (p.important_concepts | join: ' ') |
+        append: ' ' | append: (p.important_concepts | map: 'slug' | join: ' ')
+      | markdownify | strip_html | strip_newlines | truncate: 800 | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {%- endfor -%}
+  ]
+}

@@ -1,0 +1,55 @@
+---
+layout: default
+---
+<article>
+  {% if page.portrait %}
+  <div class="cover-hero" style="--cover:url('{{ page.portrait | relative_url }}')">
+    <div style="aspect-ratio: 16/7; background-image: var(--cover);"></div>
+  </div>
+  {% endif %}
+
+  <h1>{{ page.name }}</h1>
+  <div class="meta">
+    {% if page.discipline %}<span><strong>Discipline:</strong> {{ page.discipline }}</span>{% endif %}
+    {% if page.school %}<span>•</span><span><strong>School:</strong> {{ page.school }}</span>{% endif %}
+  </div>
+
+  {% if page.influences %}
+  <div class="section-title">Influences</div>
+  <div class="tags">{% for i in page.influences %}<span class="tag">{% if i.name %}{{ i.name }}{% else %}{{ i }}{% endif %}</span>{% endfor %}</div>
+  {% endif %}
+
+  {% if page.bio %}
+  <div class="section-title">Biography</div>
+  <div class="content-body">{{ page.bio | markdownify }}</div>
+  {% endif %}
+
+  {% if content %}
+  <div class="content-body">{{ content }}</div>
+  {% endif %}
+
+  {% assign authored = site.books | where: 'author', page.name %}
+  {% assign linked = '' %}
+  {% if page.related_books %}
+    {% assign linked = site.books | where_exp:'b','page.related_books contains b.slug' %}
+  {% endif %}
+  {% assign books = authored | concat: linked | uniq %}
+  {% if books and books != empty %}
+  <div class="section-title">Books</div>
+  <div class="row-scroll" aria-label="Books by {{ page.name }}">
+    {% for b in books %}
+    <a href="{{ b.url | relative_url }}" title="{{ b.title }}" style="text-align:center; color:inherit">
+      {% assign cover = b.cover | default: b.cover_image %}
+      {% if cover %}
+        <div class="book-cover" style="background-image:url('{{ cover | relative_url }}')"></div>
+      {% else %}
+        {% capture ph %}{% include ph_url.html id=b.url %}{% endcapture %}
+        <div class="book-cover" style="background-image:url('{{ ph | strip }}')"></div>
+      {% endif %}
+      <div class="muted" style="margin-top:0.35rem;font-size:0.9rem">{{ b.title }}{% if b.year %} ({{ b.year }}){% endif %}</div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>
+

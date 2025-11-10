@@ -1,0 +1,11 @@
+# Jekyll build artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.bundle/
+vendor/
+
+# Node/Ruby/OS noise
+node_modules/
+.DS_Store
+Thumbs.db

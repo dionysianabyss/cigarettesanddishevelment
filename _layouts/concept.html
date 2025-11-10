@@ -1,0 +1,68 @@
+---
+layout: default
+---
+<article>
+  <h1>{{ page.concept | default: page.title }}</h1>
+  <div class="meta">
+    {% if page.discipline %}<span><strong>Discipline:</strong> {{ page.discipline }}</span>{% endif %}
+    {% if page.author %}<span>•</span><span><strong>Author:</strong> {{ page.author }}</span>{% endif %}
+  </div>
+
+  {% if page.definition %}
+  <div class="section-title">Definition</div>
+  <div>{{ page.definition | markdownify }}</div>
+  {% endif %}
+
+  {% if page.interpretations %}
+  <div class="section-title">Interpretations</div>
+  <div>
+    {% for it in page.interpretations %}
+      <div style="margin: 0.75rem 0">
+        {% if it.philosopher %}<strong>{{ it.philosopher }}</strong>{% endif %}
+        {% if it.interpretation_text %}
+          <div class="content-body">{{ it.interpretation_text | markdownify }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% elsif page.interpretation %}
+  <div class="section-title">Interpretation</div>
+  <div>{{ page.interpretation | markdownify }}</div>
+  {% endif %}
+
+  <div class="section-title">Description</div>
+  <div class="content-body">{{ content }}</div>
+
+  {% if page.related_books %}
+  <div class="section-title">Related Books</div>
+  <div class="tags">
+    {% for item in page.related_books %}
+      {% assign rel_slug = item.slug | default: item %}
+      {% assign target = site.books | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.related_concepts %}
+  <div class="section-title">Related Concepts</div>
+  <div class="tags">
+    {% for item in page.related_concepts %}
+      {% assign rel_slug = item.slug | default: item %}
+      {% assign target = site.concepts | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.concept | default: target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.related_essays %}
+  <div class="section-title">Related Essays</div>
+  <div class="tags">
+    {% for item in page.related_essays %}
+      {% assign rel_slug = item.slug | default: item %}
+      {% assign target = site.essays | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>

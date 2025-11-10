@@ -1,0 +1,26 @@
+---
+layout: default
+---
+<article>
+  {% assign hero_image = page.image %}
+  {% if hero_image %}
+  <div class="cover-hero" style="--cover:url('{{ hero_image | relative_url }}')">
+    <div style="aspect-ratio: 16/7; background-image: var(--cover);"></div>
+  </div>
+  {% else %}
+    {% capture ph %}{% include ph_url.html id=page.url %}{% endcapture %}
+    <div class="cover-hero" style="--cover:url('{{ ph | strip }}')">
+      <div style="aspect-ratio: 16/7; background-image: var(--cover);"></div>
+    </div>
+  {% endif %}
+  <h1>{{ page.name | default: page.title }}</h1>
+  <div class="meta">
+    <span>{{ page.date | date: '%B %d, %Y' }}</span>
+    {% if page.tags %}
+      <span>•</span><span>Tags: {% for t in page.tags %}<span class="tag">{% if t.tag %}{{ t.tag }}{% else %}{{ t }}{% endif %}</span>{% endfor %}</span>
+    {% endif %}
+  </div>
+  {% if page.trigger %}<p class="muted"><em>{{ page.trigger }}</em></p>
+  {% elsif page.summary %}<p class="muted">{{ page.summary }}</p>{% endif %}
+  <div class="content-body">{{ content }}</div>
+</article>

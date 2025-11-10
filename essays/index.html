@@ -1,0 +1,38 @@
+---
+layout: default
+title: Essays
+permalink: /essays/
+search_exclude: true
+---
+<h1>Essays</h1>
+<div class="grid">
+  {% assign items = site.essays | sort: 'date' | reverse %}
+  {% for e in items %}
+  <a class="card" href="{{ e.url | relative_url }}">
+    {% assign img = e.image | default: e.cover_image %}
+    {% if img %}
+      <div class="card-cover" style="background-image:url('{{ img | relative_url }}')"></div>
+    {% else %}
+      {% capture ph %}{% include ph_url.html id=e.url %}{% endcapture %}
+      <div class="card-cover" style="background-image:url('{{ ph | strip }}')"></div>
+    {% endif %}
+    <div class="card-body">
+      <div class="card-title">{{ e.name | default: e.title | default: e.slug | replace: '-', ' ' | capitalize }}</div>
+      <div class="meta"><span>{{ e.date | date: '%B %d, %Y' }}</span></div>
+      {% if e.excerpt %}<div class="card-excerpt">{{ e.excerpt }}</div>{% endif %}
+      {% if e.main_concepts %}
+        <div class="tags">
+          {% for c in e.main_concepts %}
+            {% assign rel_slug = c.slug | default: c %}
+            {% assign target = site.concepts | where: 'slug', rel_slug | first %}
+            {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.concept | default: target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+          {% endfor %}
+        </div>
+      {% elsif e.tags %}
+        <div class="tags">{% for t in e.tags %}<span class="tag">{% if t.tag %}{{ t.tag }}{% else %}{{ t }}{% endif %}</span>{% endfor %}</div>
+      {% endif %}
+    </div>
+  </a>
+  {% endfor %}
+  {% if items == empty %}<p class="muted">No essays yet.</p>{% endif %}
+</div>

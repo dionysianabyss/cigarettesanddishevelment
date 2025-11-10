@@ -1,0 +1,103 @@
+---
+layout: default
+---
+<article>
+  {% assign hero_image = page.image | default: page.cover_image %}
+  {% if hero_image %}
+  <div class="cover-hero" style="--cover:url('{{ hero_image | relative_url }}')">
+    <div style="aspect-ratio: 16/7; background-image: var(--cover);"></div>
+  </div>
+  {% endif %}
+
+  <h1>{{ page.name | default: page.title }}</h1>
+  <div class="meta">
+    <span>{{ page.date | date: '%B %d, %Y' }}</span>
+    {% if page.tags %}
+      <span>•</span>
+      <span>
+        Tags:
+        {% for t in page.tags %}
+          <span class="tag">{% if t.tag %}{{ t.tag }}{% else %}{{ t }}{% endif %}</span>
+        {% endfor %}
+      </span>
+    {% endif %}
+  </div>
+
+  {% if page.main_concepts %}
+  <div class="tags">
+    {% for c in page.main_concepts %}
+      {% assign rel_slug = c.slug | default: c %}
+      {% assign target = site.concepts | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.concept | default: target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.table_of_contents %}
+    <div class="section-title">Table of Contents</div>
+    <ul>
+      {% for s in page.table_of_contents %}
+        {% assign st = s.section_title | default: s.title | default: s.name %}
+        {% if st %}<li><a href="#{{ st | slugify }}">{{ st }}</a></li>{% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <div class="content-body">
+    {{ content }}
+  </div>
+
+  {% if page.table_of_contents %}
+    {% for s in page.table_of_contents %}
+      {% assign st = s.section_title | default: s.title | default: s.name %}
+      {% assign sb = s.section_body | default: s.body | default: s.content %}
+      {% if st %}<h2 id="{{ st | slugify }}">{{ st }}</h2>{% endif %}
+      {% if sb %}<div class="content-body">{{ sb | markdownify }}</div>{% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if page.influenced_by %}
+  <div class="section-title">Influenced By</div>
+  <div class="tags">{% for i in page.influenced_by %}<span class="tag">{% if i.name %}{{ i.name }}{% else %}{{ i }}{% endif %}</span>{% endfor %}</div>
+  {% endif %}
+
+  {% if page.related_books %}
+  <div class="section-title">Related Books</div>
+  <div class="tags">
+    {% for item in page.related_books %}
+      {% assign rel_slug = item.slug | default: item %}
+      {% assign target = site.books | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.related_concepts %}
+  <div class="section-title">Related Concepts</div>
+  <div class="tags">
+    {% for item in page.related_concepts %}
+      {% assign rel_slug = item.slug | default: item %}
+      {% assign target = site.concepts | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.concept | default: target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.bibliography %}
+  <div class="section-title">Bibliography</div>
+  <details>
+    <summary>Show references</summary>
+    <div class="content-body">
+      {% if page.bibliography.size and page.bibliography.first %}
+        <ul>
+          {% for ref in page.bibliography %}
+            <li>{{ ref }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        {{ page.bibliography | markdownify }}
+      {% endif %}
+    </div>
+  </details>
+  {% endif %}
+</article>

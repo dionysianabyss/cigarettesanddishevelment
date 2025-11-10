@@ -1,0 +1,10 @@
+{%- assign id = include.id | default: page.url -%}
+{%- assign n = id | size | modulo: 5 -%}
+{%- case n -%}
+{%- when 0 -%}/assets/uploads/ph1.svg
+{%- when 1 -%}/assets/uploads/ph2.svg
+{%- when 2 -%}/assets/uploads/ph3.svg
+{%- when 3 -%}/assets/uploads/ph4.svg
+{%- else -%}/assets/uploads/ph5.svg
+{%- endcase -%}
+

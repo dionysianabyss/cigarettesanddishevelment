@@ -1,0 +1,19 @@
+<header class="site-header">
+  <nav class="nav container" id="site-nav">
+    <a href="{{ '/' | relative_url }}" class="brand">Cigarettes &amp; Dishevelment</a>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-controls="site-menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="spacer" style="flex:1"></span>
+    {% assign here = page.url %}
+    <div id="site-menu" class="menu-items">
+      <a href="{{ '/' | relative_url }}" class="{% if here == '/' %}is-active{% endif %}">Home</a>
+      <a href="{{ '/essays/' | relative_url }}" class="{% if here contains '/essays' %}is-active{% endif %}">Essays</a>
+      <a href="{{ '/posts/' | relative_url }}" class="{% if here contains '/posts' %}is-active{% endif %}">Posts</a>
+      <a href="{{ '/books/' | relative_url }}" class="{% if here contains '/books' %}is-active{% endif %}">Books</a>
+      <a href="{{ '/concepts/' | relative_url }}" class="{% if here contains '/concepts' %}is-active{% endif %}">Concepts</a>
+      <a href="{{ '/values/' | relative_url }}" class="{% if here contains '/values' %}is-active{% endif %}">Values</a>
+      <a href="{{ '/search/' | relative_url }}" aria-label="Search" class="{% if here contains '/search' %}is-active{% endif %}">🔍</a>
+    </div>
+  </nav>
+</header>

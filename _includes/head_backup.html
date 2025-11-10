@@ -1,0 +1,24 @@
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b0d" />
+
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+
+  <!-- Fonts: Cormorant Garamond (titles), Inter + Roboto Mono (body/mono) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <!-- SEO / OpenGraph -->
+  {% seo %}
+  {% if page.cover_image %}
+    <meta property="og:image" content="{{ page.cover_image | absolute_url }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+  {% endif %}
+
+  <!-- Expose baseurl for scripts -->
+  <script>window.SITE = { baseurl: {{ site.baseurl | jsonify }} };</script>
+
+

@@ -1,0 +1,81 @@
+/* Base + primitives */
+html,
+body {
+  height: 100%;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 20% 10%, rgba(180,108,255,0.06), transparent 60%),
+              radial-gradient(1000px 700px at 90% 80%, rgba(76,225,230,0.05), transparent 60%),
+              $color-bg;
+  color: $color-text;
+  font-family: $font-body;
+  line-height: 1.65;
+  opacity: 0;
+  transition: opacity $transition-slow;
+}
+
+body.is-loaded { opacity: 1; }
+body.fade-out  { opacity: 0; }
+
+* { box-sizing: border-box; }
+
+img { max-width: 100%; border-radius: $radius; }
+
+code, pre { font-family: $font-mono; font-size: 0.95em; }
+
+a {
+  color: $neon-teal;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color $transition-fast, border-color $transition-fast;
+}
+
+a:hover { color: $neon-orange; border-bottom-color: rgba(255,120,79,0.5); }
+
+.container { max-width: $maxw; margin: 0 auto; padding: 1.25rem; position: relative; z-index: 1; }
+
+/* Subtle film grain overlay */
+.grain-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: overlay;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n' x='0' y='0'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='1'/></svg>");
+  animation: grain 9s steps(6) infinite;
+}
+
+@keyframes grain {
+  0%   { transform: translate(0,0); }
+  20%  { transform: translate(-10px, 6px); }
+  40%  { transform: translate(8px, -4px); }
+  60%  { transform: translate(-6px, -8px); }
+  80%  { transform: translate(6px, 10px); }
+  100% { transform: translate(0,0); }
+}
+
+/* Motion/accessibility + mobile ergonomics */
+@media (prefers-reduced-motion: reduce) {
+  .grain-layer { display: none; }
+  * { animation: none !important; transition: none !important; }
+}
+
+@media (max-width: 780px) {
+  .container { padding: 1rem; }
+}
+
+/* Typography */
+h1, h2, h3, h4 { font-family: $font-title; line-height: 1.15; letter-spacing: 0.01em; }
+h1 { font-weight: 500; font-size: clamp(2.1rem, 5vw, 3.2rem); }
+h2 { font-weight: 500; font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-top: 2rem; }
+h3 { font-weight: 500; font-size: clamp(1.2rem, 2.2vw, 1.4rem); margin-top: 1.3rem; }
+p  { margin: 0.5rem 0 1.1rem; color: $color-text; }
+
+hr { border: 0; border-top: 1px solid rgba(255,255,255,0.06); margin: 2rem 0; }
+
+.muted { color: $color-muted; }

@@ -1,0 +1,33 @@
+---
+---
+/*
+  Cigarettes & Dishevelment — Theme Variables
+  Blade Runner 2049 mood: charcoal, subtle grain, low-contrast neon accents
+*/
+
+// Colors
+$color-bg: #0b0b0d;       // near-black charcoal
+$color-bg-alt: #0e0f12;   // slightly lifted charcoal
+$color-text: #e6e6e6;     // soft white
+$color-muted: #9aa0a6;    // muted gray
+
+$neon-orange: #ff784f;    // rust-orange accent
+$neon-violet: #b46cff;    // violet accent
+$neon-teal:   #4ce1e6;    // teal accent
+
+// Typography
+$font-title: 'Cormorant Garamond', serif;
+$font-body:  'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+$font-mono:  'Roboto Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+// Layout
+$radius: 8px;
+$transition-fast: 180ms ease;
+$transition-slow: 420ms ease;
+$maxw: 1100px;
+$shadow: 0 6px 24px rgba(0,0,0,0.45);
+
+@import 'base';
+@import 'components';
+@import 'layouts';
+

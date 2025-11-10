@@ -1,0 +1,62 @@
+---
+layout: default
+---
+<article>
+  {% assign hero_image = page.image %}
+  {% if hero_image %}
+  <div class="cover-hero" style="--cover:url('{{ hero_image | relative_url }}')">
+    <div style="aspect-ratio: 16/7; background-image: var(--cover);"></div>
+  </div>
+  {% endif %}
+  <h1>{{ page.title | default: page.system_name }}</h1>
+  {% if page.summary %}<p class="muted">{{ page.summary }}</p>{% endif %}
+
+  {% if page.important_concepts %}
+  <div class="section-title">Important Concepts</div>
+  <div class="tags">
+    {% for c in page.important_concepts %}
+      {% assign rel_slug = c.slug | default: c %}
+      {% assign target = site.concepts | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.concept | default: target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.virtues %}
+  <div class="section-title">Virtues</div>
+  <ul>
+    {% for v in page.virtues %}<li>{% if v.virtue %}{{ v.virtue }}{% else %}{{ v }}{% endif %}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if page.principles %}
+  <div class="section-title">Principles</div>
+  <ul>
+    {% for p in page.principles %}<li>{% if p.principle %}{{ p.principle }}{% else %}{{ p }}{% endif %}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  <div class="content-body">{% if page.explanation %}{{ page.explanation | markdownify }}{% else %}{{ content }}{% endif %}</div>
+
+  {% if page.related_essays %}
+  <div class="section-title">Related Essays</div>
+  <div class="tags">
+    {% for item in page.related_essays %}
+      {% assign rel_slug = item.slug | default: item %}
+      {% assign target = site.essays | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.related_books %}
+  <div class="section-title">Related Books</div>
+  <div class="tags">
+    {% for item in page.related_books %}
+      {% assign rel_slug = item.slug | default: item %}
+      {% assign target = site.books | where: 'slug', rel_slug | first %}
+      {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>

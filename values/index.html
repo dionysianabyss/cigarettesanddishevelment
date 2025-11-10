@@ -1,0 +1,25 @@
+---
+layout: default
+title: Values
+permalink: /values/
+search_exclude: true
+---
+<h1>Values</h1>
+<div class="grid">
+  {% for v in site.values %}
+  <a class="card" href="{{ v.url | relative_url }}">
+    {% if v.image %}
+      <div class="card-cover" style="background-image:url('{{ v.image | relative_url }}')"></div>
+    {% else %}
+      {% capture ph %}{% include ph_url.html id=v.url %}{% endcapture %}
+      <div class="card-cover" style="background-image:url('{{ ph | strip }}')"></div>
+    {% endif %}
+    <div class="card-body">
+      <div class="card-title">{{ v.system_name | default: v.title }}</div>
+      <div class="card-excerpt">{{ v.summary }}</div>
+      {% if v.virtues %}<div class="tags">{% for t in v.virtues limit: 3 %}<span class="tag">{% if t.virtue %}{{ t.virtue }}{% else %}{{ t }}{% endif %}</span>{% endfor %}</div>{% endif %}
+    </div>
+  </a>
+  {% endfor %}
+  {% if site.values == empty %}<p class="muted">No values yet.</p>{% endif %}
+</div>
