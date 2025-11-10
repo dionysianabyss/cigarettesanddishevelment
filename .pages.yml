@@ -252,4 +252,25 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+      - label: "Summary"
+        name: "summary"
+        widget: "text"
+        required: false
+      - label: "Image"
+        name: "image"
+        widget: "image"
+        required: false
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
 
