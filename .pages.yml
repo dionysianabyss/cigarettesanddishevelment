@@ -19,7 +19,7 @@ collections:
       - name: "date"
         label: "Date"
         widget: "datetime"
-      - name: "main_concepts"
+      - name: "main_concepts
         label: "Main Concepts"
         widget: "list"
       - name: "image"
