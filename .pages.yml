@@ -1,0 +1,195 @@
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  # =====================================================
+  # 1. ESSAYS
+  # =====================================================
+  - name: "essays"
+    label: "Essays"
+    folder: "content/essays"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - name: "name"
+        label: "Name"
+        widget: "string"
+      - name: "date"
+        label: "Date"
+        widget: "datetime"
+      - name: "main_concepts"
+        label: "Main Concepts"
+        widget: "list"
+      - name: "image"
+        label: "Image"
+        widget: "image"
+        required: false
+      - name: "table_of_contents"
+        label: "Table of Contents"
+        widget: "list"
+        required: false
+        fields:
+          - name: "section_title"
+            label: "Section Title"
+            widget: "string"
+          - name: "section_body"
+            label: "Section Body"
+            widget: "markdown"
+      - name: "bibliography"
+        label: "Bibliography"
+        widget: "markdown"
+        required: false
+      - name: "body"
+        label: "Full Text"
+        widget: "markdown"
+
+  # =====================================================
+  # 2. POSTS
+  # =====================================================
+  - name: "posts"
+    label: "Posts"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - name: "name"
+        label: "Name"
+        widget: "string"
+      - name: "date"
+        label: "Date"
+        widget: "datetime"
+      - name: "trigger"
+        label: "Trigger / Context"
+        widget: "text"
+        required: false
+      - name: "body"
+        label: "Body"
+        widget: "markdown"
+
+  # =====================================================
+  # 3. BOOKS
+  # =====================================================
+  - name: "books"
+    label: "Books"
+    folder: "content/books"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - name: "author"
+        label: "Author"
+        widget: "string"
+      - name: "title"
+        label: "Title"
+        widget: "string"
+      - name: "cover"
+        label: "Cover Image"
+        widget: "image"
+      - name: "year"
+        label: "Year"
+        widget: "number"
+      - name: "isbn"
+        label: "ISBN / Edition"
+        widget: "string"
+      - name: "discipline"
+        label: "Discipline"
+        widget: "string"
+        required: false
+      - name: "chapters"
+        label: "Chapters & Notes"
+        widget: "list"
+        required: false
+        fields:
+          - name: "chapter"
+            label: "Chapter Title"
+            widget: "string"
+          - name: "notes"
+            label: "Notes"
+            widget: "markdown"
+
+  # =====================================================
+  # 4. CONCEPTS
+  # =====================================================
+  - name: "concepts"
+    label: "Concepts"
+    folder: "content/concepts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - name: "concept"
+        label: "Concept"
+        widget: "string"
+      - name: "discipline"
+        label: "Discipline"
+        widget: "string"
+      - name: "definition"
+        label: "Definition"
+        widget: "markdown"
+      - name: "interpretations"
+        label: "Interpretations"
+        widget: "list"
+        fields:
+          - name: "philosopher"
+            label: "Philosopher / Thinker"
+            widget: "string"
+          - name: "interpretation_text"
+            label: "Interpretation"
+            widget: "markdown"
+      - name: "related_books"
+        label: "Related Books"
+        widget: "relation"
+        collection: "books"
+        search_fields:
+          - "title"
+        value_field: "title"
+        multiple: true
+        required: false
+      - name: "related_essays"
+        label: "Related Essays"
+        widget: "relation"
+        collection: "essays"
+        search_fields:
+          - "name"
+        value_field: "name"
+        multiple: true
+        required: false
+
+  # =====================================================
+  # 5. VALUES
+  # =====================================================
+  - name: "values"
+    label: "Values"
+    folder: "content/values"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - name: "title"
+        label: "Title"
+        widget: "string"
+      - name: "summary"
+        label: "Summary"
+        widget: "markdown"
+      - name: "important_concepts"
+        label: "Important Concepts"
+        widget: "list"
+        required: false
+      - name: "explanation"
+        label: "Explanation"
+        widget: "markdown"
+      - name: "related_essays"
+        label: "Related Essays"
+        widget: "relation"
+        collection: "essays"
+        search_fields:
+          - "name"
+        value_field: "name"
+        multiple: true
+        required: false
+      - name: "related_books"
+        label: "Related Books"
+        widget: "relation"
+        collection: "books"
+        search_fields:
+          - "title"
+        value_field: "title"
+        multiple: true
+        required: false
