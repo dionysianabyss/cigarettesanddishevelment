@@ -11,3 +11,4 @@ related_essays: [solace-in-the-ruin]
 
 Revolt is not destruction but fidelity to what must be defended.
 
+

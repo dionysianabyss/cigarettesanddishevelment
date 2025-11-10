@@ -7,3 +7,5 @@ image: /assets/uploads/ph4.svg
 ---
 
 To be brave without spectacle; to remain.
+
+

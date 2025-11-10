@@ -8,8 +8,9 @@ related_essays: [solace-in-the-ruin]
 related_books: [the_myth_of_sisyphus, tractatus_logico_suicidalis]
 explanation: |
   Love as revolt against ownership: a lucid tenderness that abides without demanding eternity. The absurd lover attends to what is
-  living—refusing to turn a person into a project or a promise into a prison. Presence over possession; reciprocity over conquest.
+  living�?"refusing to turn a person into a project or a promise into a prison. Presence over possession; reciprocity over conquest.
 image: /assets/uploads/ph5.svg
 ---
 
 To love is to attend. Not to preserve, but to accompany.
+

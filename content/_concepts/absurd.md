@@ -11,3 +11,4 @@ related_essays: [solace-in-the-ruin]
 
 Revolt, freedom, and passion: a discipline of clarity lived without appeal.
 
+

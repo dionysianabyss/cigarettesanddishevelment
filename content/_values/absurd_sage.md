@@ -7,3 +7,4 @@ principles: [discernment, proportion, listening]
 
 A quiet brightness that does not blind.
 
+

@@ -14,10 +14,10 @@ interpretations:
       Rebellion appears as praxis against bad faith: an assertion of freedom that refuses the temptation to ground itself in absolutes.
   - philosopher: Simone de Beauvoir
     interpretation_text: |
-      Revolt is an ethics of ambiguity—solidarity with others in the face of contingency, without recourse to transcendent justification.
+      Revolt is an ethics of ambiguity�?"solidarity with others in the face of contingency, without recourse to transcendent justification.
   - philosopher: Hannah Arendt
     interpretation_text: |
-      To rebel is to break with inevitability; action interrupts the given and discloses plurality—though rebellion risks becoming ideology when it forgets beginnings.
+      To rebel is to break with inevitability; action interrupts the given and discloses plurality�?"though rebellion risks becoming ideology when it forgets beginnings.
   - philosopher: Albert Camus (1951)
     interpretation_text: |
       Rebellion must resist becoming murder; once the rebel makes history into a god, revolt decays into nihilism.
@@ -27,3 +27,4 @@ related_essays: [solace-in-the-ruin]
 ---
 
 The rebel says yes and no: yes to human dignity, no to the unjust order that denies it.
+
