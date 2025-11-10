@@ -10,6 +10,8 @@ collections:
     folder: "content/essays"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - name: "name"
         label: "Name"
@@ -51,6 +53,8 @@ collections:
     folder: "content/posts"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - name: "name"
         label: "Name"
@@ -74,6 +78,8 @@ collections:
     folder: "content/books"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - name: "author"
         label: "Author"
@@ -114,6 +120,8 @@ collections:
     folder: "content/concepts"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - name: "concept"
         label: "Concept"
@@ -161,6 +169,8 @@ collections:
     folder: "content/values"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - name: "title"
         label: "Title"
