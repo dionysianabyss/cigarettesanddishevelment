@@ -19,7 +19,7 @@ collections:
       - name: "date"
         label: "Date"
         widget: "datetime"
-      - name: "main_concepts
+      - name: "main_concepts"
         label: "Main Concepts"
         widget: "list"
       - name: "image"
@@ -202,4 +202,4 @@ collections:
           - "title"
         value_field: "title"
         multiple: true
-        required: false
+        required: fals
