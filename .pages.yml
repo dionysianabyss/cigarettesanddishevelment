@@ -2,204 +2,197 @@ media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
-  # =====================================================
-  # 1. ESSAYS
-  # =====================================================
   - name: "essays"
     label: "Essays"
-    folder: "content/essays"
+    folder: "content/_essays"
     create: true
     slug: "{{slug}}"
-    format: "frontmatter"
-    extension: "md"
     fields:
-      - name: "name"
-        label: "Name"
-        widget: "string"
-      - name: "date"
-        label: "Date"
-        widget: "datetime"
-      - name: "main_concepts"
-        label: "Main Concepts"
-        widget: "list"
-      - name: "image"
-        label: "Image"
-        widget: "image"
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Cover Image", name: "cover_image", widget: "image", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Influenced By", name: "influenced_by", widget: "list", required: false }
+      - label: "Related Books"
+        name: "related_books"
+        widget: "relation"
+        collection: "books"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        multiple: true
         required: false
-      - name: "table_of_contents"
-        label: "Table of Contents"
-        widget: "list"
+      - label: "Related Concepts"
+        name: "related_concepts"
+        widget: "relation"
+        collection: "concepts"
+        search_fields: ["concept", "title"]
+        value_field: "{{slug}}"
+        display_fields: ["concept", "title"]
+        multiple: true
         required: false
-        fields:
-          - name: "section_title"
-            label: "Section Title"
-            widget: "string"
-          - name: "section_body"
-            label: "Section Body"
-            widget: "markdown"
-      - name: "bibliography"
-        label: "Bibliography"
-        widget: "markdown"
-        required: false
-      - name: "body"
-        label: "Full Text"
-        widget: "markdown"
+      - { label: "Body", name: "body", widget: "markdown" }
 
-  # =====================================================
-  # 2. POSTS
-  # =====================================================
-  - name: "posts"
-    label: "Posts"
-    folder: "content/posts"
-    create: true
-    slug: "{{slug}}"
-    format: "frontmatter"
-    extension: "md"
-    fields:
-      - name: "name"
-        label: "Name"
-        widget: "string"
-      - name: "date"
-        label: "Date"
-        widget: "datetime"
-      - name: "trigger"
-        label: "Trigger / Context"
-        widget: "text"
-        required: false
-      - name: "body"
-        label: "Body"
-        widget: "markdown"
-
-  # =====================================================
-  # 3. BOOKS
-  # =====================================================
   - name: "books"
     label: "Books"
-    folder: "content/books"
+    folder: "content/_books"
     create: true
     slug: "{{slug}}"
-    format: "frontmatter"
-    extension: "md"
     fields:
-      - name: "author"
-        label: "Author"
-        widget: "string"
-      - name: "title"
-        label: "Title"
-        widget: "string"
-      - name: "cover"
-        label: "Cover Image"
-        widget: "image"
-      - name: "year"
-        label: "Year"
-        widget: "number"
-      - name: "isbn"
-        label: "ISBN / Edition"
-        widget: "string"
-      - name: "discipline"
-        label: "Discipline"
-        widget: "string"
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Year", name: "year", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover_image", widget: "image", required: false }
+      - { label: "Discipline", name: "discipline", widget: "string", required: false }
+      - { label: "ISBN", name: "isbn", widget: "string", required: false }
+      - label: "Related Concepts"
+        name: "related_concepts"
+        widget: "relation"
+        collection: "concepts"
+        search_fields: ["concept", "title"]
+        value_field: "{{slug}}"
+        display_fields: ["concept", "title"]
+        multiple: true
         required: false
-      - name: "chapters"
-        label: "Chapters & Notes"
+      - { label: "Quotes", name: "quotes", widget: "list", required: false }
+      - { label: "Notes", name: "notes", widget: "text", required: false }
+      - label: "Table of Contents"
+        name: "table_of_contents"
         widget: "list"
         required: false
         fields:
-          - name: "chapter"
-            label: "Chapter Title"
-            widget: "string"
-          - name: "notes"
-            label: "Notes"
-            widget: "markdown"
+          - { label: "Section Title", name: "section_title", widget: "string" }
+          - { label: "Section Body", name: "section_body", widget: "text" }
+      - label: "Temp Notes"
+        name: "temp_notes"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Note", name: "note", widget: "text" }
+          - { label: "Quote", name: "quote", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
-  # =====================================================
-  # 4. CONCEPTS
-  # =====================================================
   - name: "concepts"
     label: "Concepts"
-    folder: "content/concepts"
+    folder: "content/_concepts"
     create: true
     slug: "{{slug}}"
-    format: "frontmatter"
-    extension: "md"
     fields:
-      - name: "concept"
-        label: "Concept"
-        widget: "string"
-      - name: "discipline"
-        label: "Discipline"
-        widget: "string"
-      - name: "definition"
-        label: "Definition"
-        widget: "markdown"
-      - name: "interpretations"
-        label: "Interpretations"
+      - { label: "Concept", name: "concept", widget: "string" }
+      - { label: "Discipline", name: "discipline", widget: "string", required: false }
+      - { label: "Author", name: "author", widget: "string", required: false }
+      - { label: "Definition", name: "definition", widget: "text", required: false }
+      - { label: "Interpretation (summary)", name: "interpretation", widget: "text", required: false }
+      - label: "Interpretations"
+        name: "interpretations"
         widget: "list"
+        required: false
         fields:
-          - name: "philosopher"
-            label: "Philosopher / Thinker"
-            widget: "string"
-          - name: "interpretation_text"
-            label: "Interpretation"
-            widget: "markdown"
-      - name: "related_books"
-        label: "Related Books"
+          - { label: "Philosopher", name: "philosopher", widget: "string" }
+          - { label: "Text", name: "interpretation_text", widget: "text" }
+      - label: "Related Concepts"
+        name: "related_concepts"
+        widget: "relation"
+        collection: "concepts"
+        search_fields: ["concept", "title"]
+        value_field: "{{slug}}"
+        display_fields: ["concept", "title"]
+        multiple: true
+        required: false
+      - label: "Related Books"
+        name: "related_books"
         widget: "relation"
         collection: "books"
-        search_fields:
-          - "title"
-        value_field: "title"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
         multiple: true
         required: false
-      - name: "related_essays"
-        label: "Related Essays"
+      - label: "Related Essays"
+        name: "related_essays"
         widget: "relation"
         collection: "essays"
-        search_fields:
-          - "name"
-        value_field: "name"
+        search_fields: ["title", "name"]
+        value_field: "{{slug}}"
+        display_fields: ["title", "name"]
         multiple: true
         required: false
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
-  # =====================================================
-  # 5. VALUES
-  # =====================================================
   - name: "values"
     label: "Values"
-    folder: "content/values"
+    folder: "content/_values"
     create: true
     slug: "{{slug}}"
-    format: "frontmatter"
-    extension: "md"
     fields:
-      - name: "title"
-        label: "Title"
-        widget: "string"
-      - name: "summary"
-        label: "Summary"
-        widget: "markdown"
-      - name: "important_concepts"
-        label: "Important Concepts"
-        widget: "list"
+      - { label: "System Name", name: "system_name", widget: "string" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Virtues", name: "virtues", widget: "list", required: false }
+      - { label: "Principles", name: "principles", widget: "list", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - label: "Important Concepts"
+        name: "important_concepts"
+        widget: "relation"
+        collection: "concepts"
+        search_fields: ["concept", "title"]
+        value_field: "{{slug}}"
+        display_fields: ["concept", "title"]
+        multiple: true
         required: false
-      - name: "explanation"
-        label: "Explanation"
-        widget: "markdown"
-      - name: "related_essays"
-        label: "Related Essays"
+      - label: "Related Essays"
+        name: "related_essays"
         widget: "relation"
         collection: "essays"
-        search_fields:
-          - "name"
-        value_field: "name"
+        search_fields: ["title", "name"]
+        value_field: "{{slug}}"
+        display_fields: ["title", "name"]
         multiple: true
         required: false
-      - name: "related_books"
-        label: "Related Books"
+      - label: "Related Books"
+        name: "related_books"
         widget: "relation"
         collection: "books"
-        search_fields:
-          - "title"
-        value_field: "title"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
         multiple: true
-        required: fals
+        required: false
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+  - name: "authors"
+    label: "Authors"
+    folder: "content/_authors"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Portrait", name: "portrait", widget: "image", required: false }
+      - { label: "Bio", name: "bio", widget: "text", required: false }
+      - { label: "Discipline", name: "discipline", widget: "string", required: false }
+      - { label: "School", name: "school", widget: "string", required: false }
+      - { label: "Influences", name: "influences", widget: "list", required: false }
+      - label: "Related Books"
+        name: "related_books"
+        widget: "relation"
+        collection: "books"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        multiple: true
+        required: false
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+  - name: "journal"
+    label: "Journal"
+    folder: "content/_journal"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
