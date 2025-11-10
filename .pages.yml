@@ -7,9 +7,18 @@ collections:
     folder: "content/_essays"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Cover Image", name: "cover_image", widget: "image", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Influenced By", name: "influenced_by", widget: "list", required: false }
+      - { label: "Related Books (slugs)", name: "related_books", widget: "list", required: false }
+      - { label: "Related Concepts (slugs)", name: "related_concepts", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "books"
@@ -17,47 +26,106 @@ collections:
     folder: "content/_books"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Author", name: "author", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Year", name: "year", widget: "string", required: false }
+      - { label: "Cover Image", name: "cover_image", widget: "image", required: false }
+      - { label: "Discipline", name: "discipline", widget: "string", required: false }
+      - { label: "ISBN", name: "isbn", widget: "string", required: false }
+      - { label: "Related Concepts (slugs)", name: "related_concepts", widget: "list", required: false }
+      - { label: "Quotes", name: "quotes", widget: "list", required: false }
+      - { label: "Notes", name: "notes", widget: "text", required: false }
+      - label: "Table of Contents"
+        name: "table_of_contents"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Section Title", name: "section_title", widget: "string" }
+          - { label: "Section Body", name: "section_body", widget: "text" }
+      - label: "Temp Notes"
+        name: "temp_notes"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Note", name: "note", widget: "text" }
+          - { label: "Quote", name: "quote", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "concepts"
     label: "Concepts"
     folder: "content/_concepts"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - { label: "Concept", name: "concept", widget: "string" }
       - { label: "Discipline", name: "discipline", widget: "string", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Author", name: "author", widget: "string", required: false }
+      - { label: "Definition", name: "definition", widget: "text", required: false }
+      - { label: "Interpretation (summary)", name: "interpretation", widget: "text", required: false }
+      - label: "Interpretations"
+        name: "interpretations"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Philosopher", name: "philosopher", widget: "string" }
+          - { label: "Text", name: "interpretation_text", widget: "text" }
+      - { label: "Related Concepts (slugs)", name: "related_concepts", widget: "list", required: false }
+      - { label: "Related Books (slugs)", name: "related_books", widget: "list", required: false }
+      - { label: "Related Essays (slugs)", name: "related_essays", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "values"
     label: "Values"
     folder: "content/_values"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Summary", name: "summary", widget: "text", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "System Name", name: "system_name", widget: "string" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Virtues", name: "virtues", widget: "list", required: false }
+      - { label: "Principles", name: "principles", widget: "list", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Important Concepts (slugs)", name: "important_concepts", widget: "list", required: false }
+      - { label: "Related Essays (slugs)", name: "related_essays", widget: "list", required: false }
+      - { label: "Related Books (slugs)", name: "related_books", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "authors"
     label: "Authors"
     folder: "content/_authors"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - { label: "Name", name: "name", widget: "string" }
+      - { label: "Portrait", name: "portrait", widget: "image", required: false }
       - { label: "Bio", name: "bio", widget: "text", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Discipline", name: "discipline", widget: "string", required: false }
+      - { label: "School", name: "school", widget: "string", required: false }
+      - { label: "Influences", name: "influences", widget: "list", required: false }
+      - { label: "Related Books (slugs)", name: "related_books", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "journal"
     label: "Journal"
     folder: "content/_journal"
     create: true
     slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
+
