@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Posts
+title: Journal
 permalink: /posts/
 search_exclude: true
 ---
-<h1>Posts</h1>
+<h1>Journal</h1>
 <div>
-  {% assign items = site.posts %}
+  {% assign items = site.journal %}
   {% for p in items %}
   <article style="margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.06)">
     <h3 style="margin:0"><a href="{{ p.url | relative_url }}">{{ p.name | default: p.title | default: p.slug | replace: '-', ' ' | capitalize }}</a></h3>
@@ -14,5 +14,5 @@ search_exclude: true
     {% if p.summary %}<p class="muted">{{ p.summary }}</p>{% else %}{{ p.excerpt }}{% endif %}
   </article>
   {% endfor %}
-  {% if items == empty %}<p class="muted">No posts yet.</p>{% endif %}
+  {% if items == empty %}<p class="muted">No entries yet.</p>{% endif %}
 </div>

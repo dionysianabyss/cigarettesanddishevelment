@@ -6,14 +6,14 @@ permalink: /search.json
   "items": [
   {%- assign all = '' | split: '' -%}
   {%- assign essays = site.essays -%}
-  {%- assign posts = site.posts -%}
+  {%- assign journal = site.journal -%}
   {%- assign books = site.books -%}
   {%- assign concepts = site.concepts -%}
   {%- assign values = site.values -%}
   {%- assign authors = site.authors -%}
   {%- assign pages_all = site.pages -%}
   {%- assign pages = pages_all | where_exp:'p','p.search_exclude != true and p.url != "/" and p.url != "/search/"' -%}
-  {%- assign collections = essays | concat: posts | concat: books | concat: concepts | concat: values | concat: authors | concat: pages -%}
+  {%- assign collections = essays | concat: journal | concat: books | concat: concepts | concat: values | concat: authors | concat: pages -%}
   {%- for p in collections -%}
     {
       "title": {{ p.name | default: p.title | default: p.concept | default: p.system_name | default: p.slug | jsonify }},

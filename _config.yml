@@ -33,6 +33,9 @@ collections:
   authors:
     output: true
     permalink: /authors/:name/
+  journal:
+    output: true
+    permalink: /journal/:name/
 
 defaults:
   - scope:
@@ -43,6 +46,11 @@ defaults:
   - scope:
       path: ""
       type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: journal
     values:
       layout: post
   - scope:

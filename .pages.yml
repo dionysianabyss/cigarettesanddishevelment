@@ -196,3 +196,4 @@ collections:
       - { label: "Summary", name: "summary", widget: "text", required: false }
       - { label: "Image", name: "image", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown" }
