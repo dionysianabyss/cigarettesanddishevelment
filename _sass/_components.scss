@@ -4,9 +4,9 @@
 .site-header {
   position: sticky;
   top: 0;
-  background: linear-gradient(to bottom, rgba(11,11,13,0.95), rgba(11,11,13,0.85));
+  background: linear-gradient(to bottom, rgba(5,5,7,0.95), rgba(5,5,7,0.85));
   backdrop-filter: blur(4px);
-  border-bottom: 1px solid rgba(180,108,255,0.18);
+  border-bottom: 1px solid var(--border-subtle);
   z-index: 40;
 }
 
@@ -25,13 +25,13 @@
   content: '';
   position: absolute;
   left: 0; bottom: -4px; height: 2px; width: 0;
-  background: linear-gradient(90deg, $neon-orange, $neon-violet, $neon-teal);
+  background: $accent;
   transition: width $transition-fast;
 }
 .nav a:hover::after, .nav a.is-active::after { width: 100%; }
 
 /* Mobile menu toggle (non-intrusive, responsive only) */
-.menu-toggle { display: none; align-items: center; flex-direction: column; gap: 4px; padding: 6px; border: 1px solid rgba(180,108,255,0.25); background: transparent; color: inherit; border-radius: 6px; }
+.menu-toggle { display: none; align-items: center; flex-direction: column; gap: 4px; padding: 6px; border: 1px solid var(--border-subtle); background: transparent; color: inherit; border-radius: 6px; }
 .menu-toggle span { display: block; width: 20px; height: 2px; background: $color-text; border-radius: 1px; }
 
 @media (max-width: 780px) {
@@ -49,13 +49,13 @@
 
 .card {
   background: $color-bg-alt;
-  border: 1px solid rgba(76,225,230,0.15);
+  border: 1px solid var(--border-subtle);
   border-radius: $radius;
   overflow: hidden;
   box-shadow: $shadow;
   transition: transform $transition-fast, border-color $transition-fast;
 }
-.card:hover { transform: translateY(-2px); border-color: rgba(180,108,255,0.35); }
+.card:hover { transform: translateY(-2px); border-color: rgba(201,161,107,0.35); }
 
 .card-cover { aspect-ratio: 16/10; background-size: cover; background-position: center; }
 .card-body { padding: 0.75rem 0.85rem 1rem; }
@@ -63,18 +63,28 @@
 .card-excerpt { color: $color-muted; font-size: 0.95rem; }
 
 .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
-.tag { font-size: 0.7rem; letter-spacing: 0.04em; padding: 0.18rem 0.45rem; border-radius: 999px; border: 1px solid rgba(180,108,255,0.25); color: $neon-violet; }
+.tag { font-size: 0.7rem; letter-spacing: 0.04em; padding: 0.18rem 0.45rem; border-radius: 999px; border: 1px solid var(--border-subtle); color: $accent; }
 
 /* Concept accordions */
-.discipline { border: 1px solid rgba(255,120,79,0.2); border-radius: $radius; margin-bottom: 0.75rem; background: $color-bg-alt; }
-.discipline summary { cursor: pointer; padding: 0.75rem 1rem; font-family: $font-mono; color: $neon-orange; }
+.discipline { border: 1px solid var(--border-subtle); border-radius: $radius; margin-bottom: 0.75rem; background: $color-bg-alt; }
+.discipline summary { cursor: pointer; padding: 0.75rem 1rem; font-family: $font-mono; color: $accent; }
 .discipline .items { padding: 0.25rem 1rem 1rem; }
 
 /* Horizontal scroller for books */
 .row-scroll { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.25rem; }
 .row-scroll::-webkit-scrollbar { height: 8px; }
-.row-scroll::-webkit-scrollbar-thumb { background: rgba(180,108,255,0.25); border-radius: 8px; }
+.row-scroll::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 8px; }
 .book-cover { width: 140px; height: 210px; background-size: cover; background-position: center; border-radius: $radius; border: 1px solid rgba(76,225,230,0.25); flex: 0 0 auto; }
 
 /* Footer */
-.site-footer { border-top: 1px solid rgba(180,108,255,0.18); color: $color-muted; font-size: 0.9rem; text-align: center; padding: 1.25rem; margin-top: 3rem; }
+.site-footer { border-top: 1px solid var(--border-subtle); color: $color-muted; font-size: 0.9rem; text-align: center; padding: 1.25rem; margin-top: 3rem; }
+
+/* Inputs */
+.input {
+  width: 100%; max-width: 640px; padding: 0.6rem 0.8rem; border-radius: 8px;
+  border: 1px solid var(--border-subtle); background: $color-bg-alt; color: $color-text;
+}
+
+/* Search overlay helpers */
+#search-overlay.search-overlay { display: grid; place-items: center; }
+#search-overlay[hidden] { display: none !important; }

@@ -1,25 +1,8 @@
 ---
-layout: default
+layout: listing
 title: Concepts
 permalink: /concepts/
 search_exclude: true
+collection: concepts
+description: "Mini reference pages: definitions, genealogy, thinkers, and relations."
 ---
-<h1>Concepts</h1>
-
-{% assign groups = site.concepts | group_by: 'discipline' %}
-{% for d in groups %}
-  <details class="discipline" {% if forloop.first %}open{% endif %}>
-    <summary>{{ d.name | default: 'General' }}</summary>
-    <div class="items">
-      {% for c in d.items %}
-        <div style="margin:0.4rem 0">
-          <a href="{{ c.url | relative_url }}" title="{{ c.definition | default: '' | strip_html | strip_newlines | truncate: 160 }}">{{ c.concept | default: c.title }}</a>{% if c.author %}<span class="muted"> — {{ c.author }}</span>{% endif %}
-        </div>
-      {% endfor %}
-    </div>
-  </details>
-{% endfor %}
-
-{% if groups == empty %}
-<p class="muted">No concepts yet.</p>
-{% endif %}

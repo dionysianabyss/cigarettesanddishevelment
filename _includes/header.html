@@ -12,8 +12,7 @@
       <a href="{{ '/posts/' | relative_url }}" class="{% if here contains '/posts' %}is-active{% endif %}">Posts</a>
       <a href="{{ '/books/' | relative_url }}" class="{% if here contains '/books' %}is-active{% endif %}">Books</a>
       <a href="{{ '/concepts/' | relative_url }}" class="{% if here contains '/concepts' %}is-active{% endif %}">Concepts</a>
-      <a href="{{ '/values/' | relative_url }}" class="{% if here contains '/values' %}is-active{% endif %}">Values</a>
-      <a href="{{ '/search/' | relative_url }}" aria-label="Search" class="{% if here contains '/search' %}is-active{% endif %}">🔍</a>
+      <button type="button" class="open-search" aria-label="Open search" aria-controls="search-overlay" style="background:none;border:0;color:inherit;border-bottom:1px solid transparent;cursor:pointer">🔍 Search</button>
     </div>
   </nav>
 </header>

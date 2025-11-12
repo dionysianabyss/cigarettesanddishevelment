@@ -9,6 +9,16 @@
     <main class="container content wikicontent">
       {{ content }}
     </main>
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="search-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(2px);z-index:60;">
+      <div class="container" style="max-width:760px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:1rem 1rem 0.5rem;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+        <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem">
+          <input id="omni-search-input" class="input" type="search" placeholder="Search essays, posts, books, concepts..." aria-label="Search" autocomplete="off">
+          <button type="button" id="close-search" aria-label="Close search" style="background:none;border:1px solid var(--border-subtle);color:inherit;border-radius:8px;padding:0.45rem 0.65rem">Esc</button>
+        </div>
+        <div id="omni-search-results" style="max-height:52vh;overflow:auto;padding:0.25rem 0 0.75rem"></div>
+      </div>
+    </div>
     {% include footer.html %}
 
     <script src="{{ '/assets/js/wikilinks.js' | relative_url }}" defer></script>

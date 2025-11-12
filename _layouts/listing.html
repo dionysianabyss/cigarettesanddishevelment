@@ -1,0 +1,67 @@
+---
+layout: default
+---
+<section>
+  <h1>{{ page.title }}</h1>
+  {% if page.description %}<p class="muted">{{ page.description }}</p>{% endif %}
+
+  <div style="margin: var(--space-2) 0 var(--space-3)">
+    <input id="list-filter" class="input" type="search" placeholder="Filter by title or tag..." data-filter-target="#list" aria-label="Filter list">
+    <div class="muted" style="margin-top:0.35rem;font-size:0.9rem">Type to filter</div>
+  </div>
+
+  {% assign cname = page.collection | default: page.collection_name %}
+  {% if cname == 'essays' %}
+    {% assign all = site.essays | sort: 'date' | reverse %}
+  {% elsif cname == 'journal' or cname == 'posts' %}
+    {% assign all = site.journal | sort: 'date' | reverse %}
+  {% elsif cname == 'books' %}
+    {% assign all = site.books | sort: 'date' | reverse %}
+  {% elsif cname == 'concepts' %}
+    {% assign all = site.concepts | sort: 'date' | reverse %}
+  {% elsif cname == 'values' %}
+    {% assign all = site.values | sort: 'date' | reverse %}
+  {% elsif cname == 'authors' %}
+    {% assign all = site.authors | sort: 'date' | reverse %}
+  {% else %}
+    {% assign all = '' | split: '' %}
+  {% endif %}
+  <div id="list" class="grid">
+    {% for item in all %}
+      <article class="card" data-filter-item>
+        <a href="{{ item.url | relative_url }}" style="color:inherit">
+          {% assign img = item.image | default: item.cover | default: item.cover_image %}
+          {% if img %}
+            <div class="card-cover" style="background-image:url('{{ img | relative_url }}')"></div>
+          {% endif %}
+          <div class="card-body">
+            {% assign title = item.name | default: item.title | default: item.concept | default: item.slug | replace: '-', ' ' | capitalize %}
+            <div class="card-title">{{ title }}</div>
+            <div class="meta">
+              {% if item.date %}<span>{{ item.date | date: '%B %d, %Y' }}</span>{% endif %}
+            </div>
+            {% assign ex = item.summary | default: item.excerpt %}
+            {% if ex %}<div class="card-excerpt">{{ ex }}</div>{% endif %}
+            {% if item.tags %}
+              <div class="tags">{% for t in item.tags %}<span class="tag">{% if t.tag %}{{ t.tag }}{% else %}{{ t }}{% endif %}</span>{% endfor %}</div>
+            {% elsif item.main_concepts %}
+              <div class="tags">
+                {% for c in item.main_concepts %}
+                  {% assign rel_slug = c.slug | default: c %}
+                  {% assign target = site.concepts | where: 'slug', rel_slug | first %}
+                  {% if target %}<a class="tag" href="{{ target.url | relative_url }}">{{ target.concept | default: target.title }}</a>{% else %}<span class="tag">{{ rel_slug }}</span>{% endif %}
+                {% endfor %}
+              </div>
+            {% elsif item.discipline %}
+              <div class="tags"><span class="tag">{{ item.discipline }}</span></div>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if all == empty %}
+    <p class="muted">No items.</p>
+  {% endif %}
+</section>

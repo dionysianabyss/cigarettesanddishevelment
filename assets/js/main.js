@@ -35,8 +35,10 @@
     if (el) {
       let taglines = [];
       try { taglines = JSON.parse(el.getAttribute('data-taglines') || '[]'); } catch (_) {}
-      if (taglines.length > 1) {
-        let i = 0;
+      if (taglines.length > 0) {
+        let i = Math.floor(Math.random() * taglines.length);
+        el.textContent = taglines[i];
+        if (taglines.length === 1) return;
         setInterval(() => {
           i = (i + 1) % taglines.length;
           el.style.opacity = '0';
@@ -44,6 +46,85 @@
         }, 3600);
       }
     }
+
+    // Search overlay
+    const overlay = document.getElementById('search-overlay');
+    const openBtn = document.querySelector('.open-search');
+    const closeBtn = document.getElementById('close-search');
+    const input = document.getElementById('omni-search-input');
+    const results = document.getElementById('omni-search-results');
+    let searchData = null;
+    function openOverlay() {
+      if (!overlay) return;
+      overlay.hidden = false;
+      overlay.style.display = 'grid';
+      overlay.setAttribute('aria-hidden', 'false');
+      setTimeout(() => input && input.focus(), 0);
+      if (!searchData) {
+        const base = (window.SITE && window.SITE.baseurl) ? window.SITE.baseurl : '';
+        fetch(base + '/search.json').then(r => r.json()).then(d => { searchData = d.items || []; }).catch(() => { searchData = []; });
+      }
+      document.addEventListener('keydown', escClose, { once: true });
+    }
+    function closeOverlay() {
+      if (!overlay) return;
+      overlay.hidden = true;
+      overlay.style.display = 'none';
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    function escClose(e) { if (e.key === 'Escape') { closeOverlay(); } else { document.addEventListener('keydown', escClose, { once: true }); } }
+    if (openBtn) openBtn.addEventListener('click', openOverlay);
+    if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
+    if (overlay) overlay.addEventListener('click', function (e) { if (e.target === overlay) closeOverlay(); });
+    if (input && results) {
+      function sanitize(s) { return (s || '').toString().toLowerCase(); }
+      function tokenize(q) { return sanitize(q).split(/\s+/).filter(Boolean); }
+      function matches(item, tokens) {
+        if (!tokens.length) return false;
+        const hay = sanitize((item.title||'')+' '+(item.excerpt||'')+' '+(item.content||'')+' '+(item.meta||''));
+        return tokens.every(t => hay.indexOf(t) !== -1);
+      }
+      function render(items) {
+        results.innerHTML = '';
+        if (!items.length) { results.innerHTML = '<p class="muted">No results.</p>'; return; }
+        const frag = document.createDocumentFragment();
+        items.forEach(it => {
+          const el = document.createElement('article');
+          el.style.cssText = 'margin-bottom:1.0rem;padding-bottom:0.9rem;border-bottom:1px solid rgba(255,255,255,0.06)';
+          el.innerHTML = '<h3 style="margin:0;font-size:1.05rem"><a href="' + it.url + '">' + it.title + '</a></h3>' + (it.excerpt ? '<div class="muted">' + it.excerpt + '</div>' : '');
+          frag.appendChild(el);
+        });
+        results.appendChild(frag);
+      }
+      input.addEventListener('input', function () {
+        const q = input.value || '';
+        const tokens = tokenize(q);
+        const out = (searchData && tokens.length) ? searchData.filter(it => matches(it, tokens)).slice(0, 50) : [];
+        render(out);
+      });
+    }
+
+    // Simple list filters for listing pages
+    const filter = document.querySelector('[data-filter-target]');
+    if (filter) {
+      const list = document.querySelector(filter.getAttribute('data-filter-target'));
+      if (list) {
+        filter.addEventListener('input', function () {
+          const q = (filter.value || '').toLowerCase();
+          Array.from(list.querySelectorAll('[data-filter-item]')).forEach(item => {
+            const text = (item.textContent || '').toLowerCase();
+            item.style.display = text.indexOf(q) !== -1 ? '' : 'none';
+          });
+        });
+      }
+    }
+
+    // Optional: melancholic reading mode (toggle with M)
+    document.addEventListener('keydown', function (e) {
+      if (e.key && (e.key.toLowerCase() === 'm')) {
+        document.body.classList.toggle('is-melancholic');
+      }
+    });
   });
 
   // Soft fade-out for internal navigation

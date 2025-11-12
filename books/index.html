@@ -1,30 +1,8 @@
 ---
-layout: default
+layout: listing
 title: Books
 permalink: /books/
 search_exclude: true
+collection: books
+description: References, notes, and quotations from works that matter here.
 ---
-<h1>Books</h1>
-
-{% assign grouped = site.books | group_by: 'author' %}
-{% for g in grouped %}
-  <h3 style="margin-bottom:0.5rem">{{ g.name }}</h3>
-  <div class="row-scroll" aria-label="Books by {{ g.name }}">
-    {% for b in g.items %}
-    <a href="{{ b.url | relative_url }}" title="{{ b.title }}" style="text-align:center; color:inherit">
-      {% assign cover = b.cover | default: b.cover_image %}
-      {% if cover %}
-        <div class="book-cover" style="background-image:url('{{ cover | relative_url }}')"></div>
-      {% else %}
-        {% capture ph %}{% include ph_url.html id=b.url %}{% endcapture %}
-        <div class="book-cover" style="background-image:url('{{ ph | strip }}')"></div>
-      {% endif %}
-      <div class="muted" style="margin-top:0.35rem;font-size:0.9rem">{{ b.title }}</div>
-    </a>
-    {% endfor %}
-  </div>
-{% endfor %}
-
-{% if grouped == empty %}
-<p class="muted">No books yet.</p>
-{% endif %}
