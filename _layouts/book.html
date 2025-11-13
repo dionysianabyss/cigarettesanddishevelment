@@ -17,6 +17,10 @@ layout: default
     {% if page.isbn %}<span>•</span><span><strong>ISBN:</strong> {{ page.isbn }}</span>{% endif %}
   </div>
 
+  {% if content %}
+  <div class="content-body">{{ content }}</div>
+  {% endif %}
+
   {% if page.influenced_by %}
   <div class="section-title">Influenced By</div>
   <div class="tags">{% for i in page.influenced_by %}<span class="tag">{% if i.name %}{{ i.name }}{% else %}{{ i }}{% endif %}</span>{% endfor %}</div>

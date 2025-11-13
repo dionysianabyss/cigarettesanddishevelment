@@ -7,10 +7,5 @@ discipline: literature
 isbn: ''
 quotes:
   - "To write is to resist extinction by naming it."
-notes: |
-  A somber meditation framed with exacting logic. A fictional-philosophical tract that stares into the abyss and annotates it.
 ---
-
-Fragments gathered from winter rooms and extinguished matches.
-
-
+{% include_relative tractatus_notes.md %}
