@@ -2,6 +2,7 @@ title: "Cigarettes & Dishevelment"
 description: "Philosophy dressed in cigarettes and heartbreak."
 url: "" # set your production URL (e.g., https://username.github.io)
 baseurl: "" # set if using a project site (e.g., /cigarettesanddishevelment)
+og_image: /assets/uploads/ph1.svg
 collections_dir: content
 
 permalink: pretty

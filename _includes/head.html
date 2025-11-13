@@ -18,8 +18,9 @@
 
   <!-- SEO / OpenGraph -->
   {% seo %}
-  {% if page.cover_image %}
-    <meta property="og:image" content="{{ page.cover_image | absolute_url }}" />
+  {% assign ogimg = page.cover_image | default: page.image | default: site.og_image %}
+  {% if ogimg %}
+    <meta property="og:image" content="{{ ogimg | absolute_url }}" />
     <meta name="twitter:card" content="summary_large_image" />
   {% endif %}
 

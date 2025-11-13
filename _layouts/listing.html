@@ -67,4 +67,49 @@ layout: default
   {% if items == empty %}
     <p class="muted">No items.</p>
   {% endif %}
+
+  {% if cname == 'archetypes' and items and items != empty %}
+    <h3 class="section-title">Writing by archetype</h3>
+    <div>
+      {% for a in items %}
+        {% assign key = a.slug | default: a.title | slugify %}
+        {% assign essays = site.essays | where: 'archetype', key | where_exp: 'i', 'i.published != false' %}
+        {% assign posts  = site.journal | where: 'archetype', key | where_exp: 'i', 'i.published != false' %}
+        {% assign books  = site.books | where: 'archetype', key | where_exp: 'i', 'i.published != false' %}
+        {% assign concepts = site.concepts | where: 'archetype', key | where_exp: 'i', 'i.published != false' %}
+        <details class="discipline" style="margin-bottom:1rem">
+          <summary>{{ a.title }}</summary>
+          <div class="items" style="padding-top:0.5rem">
+            {% if essays and essays != empty %}
+              <div class="section-title" style="margin-top:1rem">Essays</div>
+              <ul>
+                {% for it in essays %}<li><a href="{{ it.url | relative_url }}">{{ it.title | default: it.name }}</a></li>{% endfor %}
+              </ul>
+            {% endif %}
+            {% if posts and posts != empty %}
+              <div class="section-title" style="margin-top:1rem">Posts</div>
+              <ul>
+                {% for it in posts %}<li><a href="{{ it.url | relative_url }}">{{ it.title | default: it.name }}</a></li>{% endfor %}
+              </ul>
+            {% endif %}
+            {% if books and books != empty %}
+              <div class="section-title" style="margin-top:1rem">Books</div>
+              <ul>
+                {% for it in books %}<li><a href="{{ it.url | relative_url }}">{{ it.title | default: it.name }}</a></li>{% endfor %}
+              </ul>
+            {% endif %}
+            {% if concepts and concepts != empty %}
+              <div class="section-title" style="margin-top:1rem">Concepts</div>
+              <ul>
+                {% for it in concepts %}<li><a href="{{ it.url | relative_url }}">{{ it.concept | default: it.title }}</a></li>{% endfor %}
+              </ul>
+            {% endif %}
+            {% if essays == empty and posts == empty and books == empty and concepts == empty %}
+              <p class="muted">No related items yet.</p>
+            {% endif %}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  {% endif %}
 </section>
