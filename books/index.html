@@ -11,7 +11,7 @@ search_exclude: true
   <p class="muted">Grouped by author for quiet browsing.</p>
 </header>
 
-{% assign published_books = site.books | where: 'published', true %}
+{% assign published_books = site.books | where_exp: 'i','i.published != false' %}
 {% assign groups = published_books | group_by: 'author' | sort: 'name' %}
 
 {% for g in groups %}
