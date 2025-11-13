@@ -2,7 +2,7 @@
 title: "How the Philosophically Inclined Write Their Vows"
 date: 2025-01-01
 tags: [essay, vows, philosophy, love]
-summary: "Writing adult, lucid vows without illusions: devotion as discipline, presence over prediction, tenderness without delusion."
+summary: "Writing lucid vows without illusions: devotion as discipline, presence over prediction, tenderness without delusion."
 image: /assets/uploads/ph3.svg
 published: true
 ---
