@@ -16,6 +16,7 @@ sass:
 plugins:
   - jekyll-seo-tag
   - jekyll-feed
+  - jekyll-sitemap
 
 collections:
   essays:

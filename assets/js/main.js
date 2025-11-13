@@ -124,6 +124,16 @@
       if (e.key && (e.key.toLowerCase() === 'm')) {
         document.body.classList.toggle('is-melancholic');
       }
+      // Keyboard shortcut: '/' opens search and focuses input unless typing in a field
+      if (e.key === '/' && !(e.target && (/^(input|textarea)$/i).test(e.target.tagName))) {
+        e.preventDefault();
+        openOverlay();
+      }
+    });
+
+    // Lazy-load images by default if not specified
+    document.querySelectorAll('img').forEach(img => {
+      try { if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy'); } catch (_) {}
     });
   });
 

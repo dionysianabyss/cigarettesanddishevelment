@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://cigarettesanddishevelment.com/sitemap.xml
+

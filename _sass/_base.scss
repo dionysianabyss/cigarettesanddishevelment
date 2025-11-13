@@ -79,8 +79,8 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
 blockquote {
   margin: var(--space-4) 0;
   padding: var(--space-3);
-  border-left: 3px solid $accent;
-  background: $color-bg-alt;
+  border-left: 4px solid $accent;
+  background: rgba(255,255,255,0.03);
   color: $color-text;
   font-family: $font-title;
   font-style: italic;

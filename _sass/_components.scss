@@ -17,8 +17,8 @@
   color: $color-text;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 0.85rem;
-  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.8rem;
   position: relative;
 }
 .nav a::after {
@@ -46,6 +46,7 @@
 
 /* Cards & grids */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+.grid { margin-bottom: var(--space-5); }
 
 .card {
   background: $color-bg-alt;
@@ -55,11 +56,11 @@
   box-shadow: $shadow;
   transition: transform $transition-fast, border-color $transition-fast;
 }
-.card:hover { transform: translateY(-2px); border-color: rgba(201,161,107,0.35); }
+.card:hover { transform: translateY(-2px); border-color: rgba(201,161,107,0.5); box-shadow: 0 6px 18px rgba(201,161,107,0.08); }
 
 .card-cover { aspect-ratio: 16/10; background-size: cover; background-position: center; }
-.card-body { padding: 0.75rem 0.85rem 1rem; }
-.card-title { font-size: 1.05rem; margin: 0.35rem 0 0.25rem; }
+.card-body { padding: 1rem 1rem 1.1rem; }
+.card-title { font-size: 1.15rem; font-weight: 600; margin: 0.35rem 0 0.25rem; }
 .card-excerpt { color: $color-muted; font-size: 0.95rem; }
 
 .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
