@@ -8,13 +8,25 @@ layout: default
     {% if page.author %}<span>•</span><span><strong>Author:</strong> {{ page.author }}</span>{% endif %}
   </div>
 
+  <nav class="concept-toc" aria-label="On this page">
+    <span class="muted" style="margin-right:0.5rem">On this page:</span>
+    <ul>
+      <li><a href="#definition">Definition</a></li>
+      <li><a href="#genealogy">Genealogy</a></li>
+      <li><a href="#key-thinkers">Key Thinkers</a></li>
+      <li><a href="#psychology">Psychology</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#related-concepts">Related Concepts</a></li>
+    </ul>
+  </nav>
+
   {% if page.definition %}
-  <div class="section-title">Definition</div>
+  <div class="section-title"><a id="definition"></a>Definition</div>
   <div>{{ page.definition | markdownify }}</div>
   {% endif %}
 
   {% if page.interpretations %}
-  <div class="section-title">Interpretations</div>
+  <div class="section-title"><a id="genealogy"></a>Interpretations</div>
   <div>
     {% for it in page.interpretations %}
       <div style="margin: 0.75rem 0">
@@ -26,15 +38,15 @@ layout: default
     {% endfor %}
   </div>
   {% elsif page.interpretation %}
-  <div class="section-title">Interpretation</div>
+  <div class="section-title"><a id="genealogy"></a>Interpretation</div>
   <div>{{ page.interpretation | markdownify }}</div>
   {% endif %}
 
-  <div class="section-title">Description</div>
+  <div class="section-title"><a id="philosophy"></a>Description</div>
   <div class="content-body">{{ content }}</div>
 
   {% if page.related_books %}
-  <div class="section-title">Related Books</div>
+  <div class="section-title"><a id="related-concepts"></a>Related Books</div>
   <div class="tags">
     {% for item in page.related_books %}
       {% assign rel_slug = item.slug | default: item %}

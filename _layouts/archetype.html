@@ -1,0 +1,59 @@
+---
+layout: default
+---
+<article>
+  <h1>{{ page.title }}</h1>
+  {% if page.values %}
+    <div class="meta">
+      <span><strong>Values:</strong></span>
+      <div class="tags">{% for v in page.values %}<span class="tag">{{ v }}</span>{% endfor %}</div>
+    </div>
+  {% endif %}
+
+  <div class="content-body">{{ content }}</div>
+
+  <section class="section" style="margin-top:2rem">
+    <div class="section-title">Writing under this archetype</div>
+    {% assign essays = site.essays | where: 'archetype', page.slug | where_exp: 'i', 'i.published != false' %}
+    {% assign posts  = site.journal | where: 'archetype', page.slug | where_exp: 'i', 'i.published != false' %}
+    {% assign books  = site.books | where: 'archetype', page.slug | where_exp: 'i', 'i.published != false' %}
+    {% assign concepts = site.concepts | where: 'archetype', page.slug | where_exp: 'i', 'i.published != false' %}
+
+    {% if essays and essays != empty %}
+      <h3>Essays</h3>
+      <ul>
+        {% for item in essays %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if posts and posts != empty %}
+      <h3>Posts</h3>
+      <ul>
+        {% for item in posts %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if books and books != empty %}
+      <h3>Books</h3>
+      <ul>
+        {% for item in books %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if concepts and concepts != empty %}
+      <h3>Concepts</h3>
+      <ul>
+        {% for item in concepts %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.concept | default: item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </section>
+</article>
+

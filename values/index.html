@@ -1,12 +1,18 @@
 ---
 layout: default
-title: Values
+title: Values & Archetypes
 permalink: /values/
 search_exclude: true
 ---
-<h1>Values</h1>
+<header class="section-header">
+  <h1>Values</h1>
+  <p class="muted">Core commitments of the project: lucidity, devotion, tenderness under pressure, revolt, and difficult honesty.</p>
+  <p class="muted">Below are both individual value notes and the archetypes that embody them.</p>
+</header>
+
 <div class="grid">
-  {% for v in site.values %}
+  {% assign vals = site.values | where_exp: 'i', 'i.published != false' %}
+  {% for v in vals %}
   <a class="card" href="{{ v.url | relative_url }}">
     {% if v.image %}
       <div class="card-cover" style="background-image:url('{{ v.image | relative_url }}')"></div>
@@ -21,5 +27,19 @@ search_exclude: true
     </div>
   </a>
   {% endfor %}
-  {% if site.values == empty %}<p class="muted">No values yet.</p>{% endif %}
+  {% if vals == empty %}<p class="muted">No values yet.</p>{% endif %}
+</div>
+
+<h3 class="section-title">Archetypes</h3>
+<div class="grid">
+  {% assign arch = site.archetypes | where_exp: 'i', 'i.published != false' %}
+  {% for a in arch %}
+  <a class="card" href="{{ a.url | relative_url }}">
+    <div class="card-body">
+      <div class="card-title">{{ a.title }}</div>
+      {% if a.values %}<div class="tags">{% for t in a.values %}<span class="tag">{{ t }}</span>{% endfor %}</div>{% endif %}
+    </div>
+  </a>
+  {% endfor %}
+  {% if arch == empty %}<p class="muted">No archetypes yet.</p>{% endif %}
 </div>

@@ -15,7 +15,7 @@ layout: default
 <section class="container">
   <h3 class="section-title">Latest Essays</h3>
   <div class="grid">
-    {% assign essays = site.essays | sort: 'date' | reverse | slice: 0, 3 %}
+    {% assign essays = site.essays | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 3 %}
     {% for e in essays %}
     <a class="card" href="{{ e.url | relative_url }}">
       {% assign eimg = e.image | default: e.cover_image %}
@@ -36,7 +36,7 @@ layout: default
 
   <h3 class="section-title">Latest Posts</h3>
   <div class="grid">
-    {% assign posts = site.journal | sort: 'date' | reverse | slice: 0, 3 %}
+    {% assign posts = site.journal | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 3 %}
     {% for p in posts %}
     <a class="card" href="{{ p.url | relative_url }}">
       {% if p.image %}
@@ -56,7 +56,7 @@ layout: default
 
   <h3 class="section-title">Recent Books</h3>
   <div class="grid">
-    {% assign books = site.books | sort: 'date' | reverse | slice: 0, 3 %}
+    {% assign books = site.books | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 3 %}
     {% for b in books %}
     <a class="card" href="{{ b.url | relative_url }}">
       {% assign cover = b.cover | default: b.cover_image %}
@@ -76,7 +76,7 @@ layout: default
 
   <h3 class="section-title">Concepts</h3>
   <div class="grid">
-    {% assign concepts = site.concepts | sort: 'date' | reverse | slice: 0, 6 %}
+    {% assign concepts = site.concepts | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 6 %}
     {% for c in concepts %}
     <a class="card" href="{{ c.url | relative_url }}">
       <div class="card-body">

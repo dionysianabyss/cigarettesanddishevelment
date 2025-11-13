@@ -19,6 +19,8 @@ layout: default
     {% assign all = site.books | sort: 'date' | reverse %}
   {% elsif cname == 'concepts' %}
     {% assign all = site.concepts | sort: 'date' | reverse %}
+  {% elsif cname == 'archetypes' %}
+    {% assign all = site.archetypes | sort: 'title' %}
   {% elsif cname == 'values' %}
     {% assign all = site.values | sort: 'date' | reverse %}
   {% elsif cname == 'authors' %}
@@ -26,8 +28,9 @@ layout: default
   {% else %}
     {% assign all = '' | split: '' %}
   {% endif %}
+  {% assign items = all | where_exp: 'i', 'i.published != false' %}
   <div id="list" class="grid">
-    {% for item in all %}
+    {% for item in items %}
       <article class="card" data-filter-item>
         <a href="{{ item.url | relative_url }}" style="color:inherit">
           {% assign img = item.image | default: item.cover | default: item.cover_image %}
@@ -61,7 +64,7 @@ layout: default
     {% endfor %}
   </div>
 
-  {% if all == empty %}
+  {% if items == empty %}
     <p class="muted">No items.</p>
   {% endif %}
 </section>
