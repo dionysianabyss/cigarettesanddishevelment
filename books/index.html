@@ -11,23 +11,29 @@ search_exclude: true
   <p class="muted">Grouped by author for quiet browsing.</p>
 </header>
 
-{% assign groups = site.books | where_exp: 'i','i.published != false' | group_by: 'author' | sort: 'name' %}
+{% assign published_books = site.books | where: 'published', true %}
+{% assign groups = published_books | group_by: 'author' | sort: 'name' %}
+
 {% for g in groups %}
-  <h3 class="section-title">{{ g.name | default: 'Unknown Author' }}</h3>
-  <div class="grid">
-    {% for b in g.items %}
-      <a href="{{ b.url | relative_url }}" title="{{ b.title }}" style="text-align:center; color:inherit">
-        {% assign cover = b.cover | default: b.cover_image %}
-        {% if cover %}
-          <div class="book-cover" style="background-image:url('{{ cover | relative_url }}')"></div>
-        {% else %}
-          {% capture ph %}{% include ph_url.html id=b.url %}{% endcapture %}
-          <div class="book-cover" style="background-image:url('{{ ph | strip }}')"></div>
-        {% endif %}
-        <div class="muted" style="margin-top:0.35rem;font-size:0.9rem">{{ b.title }}</div>
-      </a>
-    {% endfor %}
-  </div>
+  <section class="author-section">
+    <h2 class="author-heading">{{ g.name | default: 'Unknown Author' }}</h2>
+    <div class="bookshelf">
+      {% for b in g.items %}
+        <article class="book-card">
+          <a href="{{ b.url | relative_url }}" title="{{ b.title }}">
+            {% assign img = b.image | default: b.cover | default: b.cover_image %}
+            {% if img %}
+              <img class="book-img" src="{{ img | relative_url }}" alt="{{ b.title | escape }}" loading="lazy">
+            {% else %}
+              {% capture ph %}{% include ph_url.html id=b.url %}{% endcapture %}
+              <img class="book-img" src="{{ ph | strip | relative_url }}" alt="{{ b.title | escape }}" loading="lazy">
+            {% endif %}
+            <p class="book-title">{{ b.title }}</p>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
 {% endfor %}
 
 {% if groups == empty %}

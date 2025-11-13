@@ -95,3 +95,10 @@
 .concept-toc ul { list-style: none; padding: 0; margin: 0; display: inline-flex; flex-wrap: wrap; gap: 0.6rem 1rem; }
 .concept-toc a { color: $color-muted; border-bottom: 1px solid transparent; }
 .concept-toc a:hover { color: $accent; border-bottom-color: rgba(201,161,107,0.4); }
+
+/* Books page (scoped minimal classes) */
+.author-heading { border-bottom: 2px solid $accent; padding-bottom: 0.25rem; margin: 2rem 0 1rem; }
+.bookshelf { display: flex; flex-wrap: wrap; gap: 1rem; }
+.book-card { width: 140px; }
+.book-img { width: 140px; height: auto; display: block; border: 1px solid var(--border-subtle); border-radius: $radius; background: $color-bg-alt; }
+.book-title { margin: 0.4rem 0 0; font-size: 0.95rem; color: $color-text; text-align: center; }
