@@ -30,11 +30,15 @@
       });
     }
 
-    // Rotate taglines on home
+    // Rotate taglines on home/any page
     const el = document.getElementById('rotating-tagline');
     if (el) {
       let taglines = [];
-      try { taglines = JSON.parse(el.getAttribute('data-taglines') || '[]'); } catch (_) {}
+      if (Array.isArray(window.CANON_TAGLINES) && window.CANON_TAGLINES.length) {
+        taglines = window.CANON_TAGLINES;
+      } else {
+        try { taglines = JSON.parse(el.getAttribute('data-taglines') || '[]'); } catch (_) {}
+      }
       if (taglines.length > 0) {
         let i = Math.floor(Math.random() * taglines.length);
         el.textContent = taglines[i];

@@ -102,3 +102,25 @@
 .book-card { width: 140px; }
 .book-img { width: 140px; height: auto; display: block; border: 1px solid var(--border-subtle); border-radius: $radius; background: $color-bg-alt; }
 .book-title { margin: 0.4rem 0 0; font-size: 0.95rem; color: $color-text; text-align: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; letter-spacing: 0.02em; }
+.btn-primary { background: $accent; color: #1a1a1a; border: 1px solid $accent; }
+.btn-ghost { background: transparent; color: $accent; border: 1px solid $accent; }
+.btn:hover { transform: translateY(-1px); transition: transform $transition-fast; }
+
+/* Image strip */
+.noir-image-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 0.5rem; padding: 0.5rem 0; overflow-x: auto; }
+.noir-image { aspect-ratio: 16/10; background-size: cover; background-position: center; border: 1px solid var(--border-subtle); border-radius: $radius; min-width: 220px; }
+
+/* Triad */
+.noir-triad .triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.kicker { color: $accent; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8rem; margin-bottom: 0.3rem; }
+.triad-item p { margin-top: 0.4rem; }
+@media (max-width: 900px) { .noir-triad .triad { grid-template-columns: 1fr; } }
+
+/* Newsletter */
+.newsletter-strip { background: #0a0a0f; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); margin-top: 2.5rem; }
+.newsletter-inner { display: flex; gap: 1rem; align-items: center; justify-content: space-between; padding: 1.2rem 0; }
+.newsletter-form { display: flex; gap: 0.6rem; }
+@media (max-width: 780px) { .newsletter-inner { flex-direction: column; align-items: flex-start; } }

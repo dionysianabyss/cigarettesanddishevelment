@@ -1,91 +1,99 @@
 ---
 layout: default
 ---
-<section class="hero">
+<section class="hero hero-full">
   <div class="hero-overlay" aria-hidden="true"></div>
   <canvas id="fog-canvas" class="fog" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;"></canvas>
-  <div class="hero-inner">
-    <h1 class="title">{{ site.title }}</h1>
-    <div class="subtitle">An archive of decay, devotion, and difficult honesty.</div>
-    <div id="rotating-tagline" class="tagline" data-taglines="{{ page.taglines | jsonify | escape }}">{{ page.taglines | first }}</div>
-    <div class="accent-line" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1 class="title">{{ site.title }}</h1>
+      <div class="subtitle">{{ site.description }}</div>
+      <div id="rotating-tagline" class="tagline" data-taglines="{{ page.taglines | jsonify | escape }}">{{ page.taglines | first }}</div>
+      <div class="accent-line" aria-hidden="true"></div>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="{{ '/studies/' | relative_url }}">Enter the Mausoleum</a>
+        <a class="btn btn-ghost" href="{{ '/values/' | relative_url }}">Meet My Archetypes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="noir-image-strip" aria-label="Mood gallery">
+  {% assign imgs = site.static_files | where_exp: 'f', "f.path contains '/assets/uploads/'" %}
+  {% assign picks = imgs | slice: 0, 6 %}
+  {% if picks and picks != empty %}
+    {% for f in picks %}
+      <div class="noir-image" style="background-image:url('{{ f.path | relative_url }}')"></div>
+    {% endfor %}
+  {% else %}
+    {% for i in (1..6) %}
+      <div class="noir-image" style="background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));"></div>
+    {% endfor %}
+  {% endif %}
+</section>
+
+<section class="statement">
+  <div class="container">
+    <h2 class="statement-title">An archive of decay, devotion, and difficult honesty.</h2>
+    <p class="muted">A small literary project and living archive—essays, notebooks, concepts, and reading marginalia—kept with lucidity and a refusal of easy consolations.</p>
+  </div>
+</section>
+
+<section class="container noir-triad" aria-label="Overview">
+  <div class="triad">
+    <div class="triad-item">
+      <div class="kicker">01</div>
+      <h3>My Studies</h3>
+      <p class="muted">Philosophy, psychology, analysis, and literary notes—work toward an honest psychology of being.</p>
+      <p><a href="{{ '/studies/' | relative_url }}">Explore →</a></p>
+    </div>
+    <div class="triad-item">
+      <div class="kicker">02</div>
+      <h3>My Archetypes</h3>
+      <p class="muted">Figures that keep the work upright—devotion, lucidity, tenderness under pressure, revolt.</p>
+      <p><a href="{{ '/values/' | relative_url }}">Explore →</a></p>
+    </div>
+    <div class="triad-item">
+      <div class="kicker">03</div>
+      <h3>My Anti‑Archetypes</h3>
+      <p class="muted">The postures that undo us—sentimental self‑sabotage, performance, dissociation, and cowardice.</p>
+      <p><a href="{{ '/anti-archetypes/' | relative_url }}">Explore →</a></p>
+    </div>
   </div>
 </section>
 
 <section class="container">
-  <h3 class="section-title">From My Studies</h3>
+  <h3 class="section-title">Latest from the Mausoleum</h3>
+  {% assign feed = site.essays | concat: site.journal | concat: site.concepts %}
+  {% assign feed = feed | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 6 %}
   <div class="grid">
-    {% assign essays = site.essays | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 3 %}
-    {% for e in essays %}
-    <a class="card" href="{{ e.url | relative_url }}">
-      {% assign eimg = e.image | default: e.cover_image %}
-      {% if eimg %}
-        <div class="card-cover" style="background-image:url('{{ eimg | relative_url }}')"></div>
-      {% else %}
-        {% capture ph %}{% include ph_url.html id=e.url %}{% endcapture %}
-        <div class="card-cover" style="background-image:url('{{ ph | strip }}')"></div>
-      {% endif %}
+    {% for item in feed %}
+    <a class="card" href="{{ item.url | relative_url }}">
       <div class="card-body">
-        <div class="card-title">{{ e.name | default: e.title | default: e.slug | replace: '-', ' ' | capitalize }}</div>
-        <div class="meta"><span>{{ e.date | date: '%B %d, %Y' }}</span></div>
-        {% if e.excerpt %}<div class="card-excerpt">{{ e.excerpt }}</div>{% endif %}
+        <div class="card-title">{{ item.name | default: item.title | default: item.concept }}</div>
+        <div class="meta">
+          <span>{{ item.collection | replace: 'journal','post' | capitalize }}</span>
+          <span>•</span>
+          <span>{{ item.date | date: '%B %d, %Y' }}</span>
+        </div>
+        {% assign ex = item.summary | default: item.excerpt %}
+        {% if ex %}<div class="card-excerpt">{{ ex }}</div>{% endif %}
       </div>
     </a>
     {% endfor %}
   </div>
+</section>
 
-  <h3 class="section-title">Latest Posts</h3>
-  <div class="grid">
-    {% assign posts = site.journal | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 3 %}
-    {% for p in posts %}
-    <a class="card" href="{{ p.url | relative_url }}">
-      {% if p.image %}
-        <div class="card-cover" style="background-image:url('{{ p.image | relative_url }}')"></div>
-      {% else %}
-        {% capture ph %}{% include ph_url.html id=p.url %}{% endcapture %}
-        <div class="card-cover" style="background-image:url('{{ ph | strip }}')"></div>
-      {% endif %}
-      <div class="card-body">
-        <div class="card-title">{{ p.name | default: p.title | default: p.slug | replace: '-', ' ' | capitalize }}</div>
-        <div class="meta"><span>{{ p.date | date: '%B %d, %Y' }}</span></div>
-        <div class="card-excerpt">{{ p.summary | default: p.excerpt }}</div>
-      </div>
-    </a>
-    {% endfor %}
-  </div>
-
-  <h3 class="section-title">Recent Books</h3>
-  <div class="grid">
-    {% assign books = site.books | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 3 %}
-    {% for b in books %}
-    <a class="card" href="{{ b.url | relative_url }}">
-      {% assign cover = b.cover | default: b.cover_image %}
-      {% if cover %}
-        <div class="card-cover" style="background-image:url('{{ cover | relative_url }}')"></div>
-      {% else %}
-        {% capture ph %}{% include ph_url.html id=b.url %}{% endcapture %}
-        <div class="card-cover" style="background-image:url('{{ ph | strip }}')"></div>
-      {% endif %}
-      <div class="card-body">
-        <div class="card-title">{{ b.title }}</div>
-        <div class="card-excerpt">{{ b.author }}{% if b.year %} · {{ b.year }}{% endif %}</div>
-      </div>
-    </a>
-    {% endfor %}
-  </div>
-
-  <h3 class="section-title">Concepts</h3>
-  <div class="grid">
-    {% assign concepts = site.concepts | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 6 %}
-    {% for c in concepts %}
-    <a class="card" href="{{ c.url | relative_url }}">
-      <div class="card-body">
-        <div class="card-title">{{ c.concept | default: c.title }}</div>
-        {% if c.author %}<div class="card-excerpt">{{ c.author }}</div>{% endif %}
-        {% if c.discipline %}<div class="tags"><span class="tag">{{ c.discipline }}</span></div>{% endif %}
-      </div>
-    </a>
-    {% endfor %}
+<section class="newsletter-strip" aria-label="Newsletter">
+  <div class="container newsletter-inner">
+    <div>
+      <div class="kicker">Letters from the Mausoleum</div>
+      <h3>Receive dispatches on love, lucidity, and collapse.</h3>
+    </div>
+    <form action="#" method="post" class="newsletter-form" onsubmit="return false;">
+      <input type="email" name="email" placeholder="you@example.com" class="input" aria-label="Email address">
+      <button class="btn btn-primary" type="submit">Subscribe</button>
+    </form>
   </div>
 </section>
 

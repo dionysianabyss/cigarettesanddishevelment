@@ -7,11 +7,17 @@
   text-align: center;
   position: relative;
 }
+.hero-full { min-height: 100vh; }
 .hero-inner { position: relative; z-index: 2; padding: 2rem 1rem; }
-.hero .title { font-family: $font-title; font-weight: 500; font-size: clamp(2.2rem, 6vw, 3.2rem); letter-spacing: 0.02em; }
+.hero .title { font-family: $font-title; font-weight: 500; font-size: clamp(2.6rem, 6vw, 4.2rem); letter-spacing: 0.02em; }
 .hero .subtitle { color: $color-muted; margin-top: 0.75rem; font-family: $font-mono; }
 .hero .tagline { margin-top: 1rem; color: $accent; font-family: $font-mono; opacity: 0.95; transition: opacity $transition-fast; }
 .hero .accent-line { width: 120px; height: 2px; background: $accent; opacity: 0.7; margin: 1rem auto 0; }
+.hero-ctas { margin-top: 1.2rem; display: flex; gap: 0.6rem; justify-content: center; }
+.hero .hero-copy { text-align: left; max-width: 760px; }
+
+.statement { border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 2.2rem 0; margin: 1.5rem 0; }
+.statement-title { font-size: clamp(1.6rem, 3vw, 2rem); }
 
 .hero-overlay {
   position: absolute;
