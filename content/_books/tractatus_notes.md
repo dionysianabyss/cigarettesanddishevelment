@@ -461,4 +461,8 @@ This is the final cruelty of the _Tractatus_: it makes us witnesses to a murder 
 
 ----------
 
+<<<<<<< HEAD
 **[End of notes. To be continued never. The hourglass is empty.]**
+=======
+**[End of notes. To be continued never. The hourglass is empty.]**
+>>>>>>> 3bc2c8e (feat(IA): add My Studies hub; introduce Anti-Archetypes collection + stubs; rename Archetypes; update nav; search tweaks; keep books; docs note)

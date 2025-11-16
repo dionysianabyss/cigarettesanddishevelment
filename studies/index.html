@@ -1,0 +1,61 @@
+---
+layout: default
+title: My Studies
+permalink: /studies/
+search_exclude: true
+---
+
+<header class="section-header">
+  <h1>My Studies</h1>
+  <p class="muted">Notes towards an honest psychology of Being.</p>
+</header>
+
+{% assign all_items = site.essays | concat: site.concepts | concat: site.journal %}
+{% assign all_items = all_items | where_exp:'i','i.published != false' %}
+
+{% assign tagsets = 
+  'Philosophy|philosophy,existentialism,ethics,epistemology,metaphysics,absurdism,camus,cioran,nietzsche,byung-chul-han;'
+  | append: 'Psychology|psychology,social-psychology,cognitive-psychology,personality,attachment,emotion,trauma;'
+  | append: 'Psychoanalysis|psychoanalysis,freud,lacan,desire,the-other,drives,unconscious;'
+  | append: 'Literary Studies|literature,poetry,novel,tragic-literature,criticism;'
+  | append: 'Notes & Notebooks|notes,fragments,notebook,journal' %}
+
+{% assign sections = tagsets | split: ';' %}
+{% for s in sections %}
+  {% assign pair = s | split: '|' %}
+  {% assign section_title = pair[0] %}
+  {% assign tags_str = pair[1] | default: '' %}
+
+  {% if section_title != '' %}
+  <section>
+    <h3 class="section-title">{{ section_title }}</h3>
+    <p class="muted" style="margin-top:-0.5rem">Latest from {{ section_title | downcase }}.</p>
+    <div class="grid">
+      {% assign shown = 0 %}
+      {% for item in all_items %}
+        {% if shown >= 5 %}{% break %}{% endif %}
+        {% assign matched = false %}
+        {% if item.tags %}
+          {% for t in item.tags %}
+            {% assign tagname = t.tag | default: t | downcase %}
+            {% if tags_str contains tagname %}{% assign matched = true %}{% break %}{% endif %}
+          {% endfor %}
+        {% endif %}
+        {% if matched or section_title == 'Notes & Notebooks' and item.collection == 'journal' %}
+          {% assign shown = shown | plus: 1 %}
+          <a class="card" href="{{ item.url | relative_url }}">
+            <div class="card-body">
+              <div class="card-title">{{ item.name | default: item.title | default: item.slug | replace: '-', ' ' | capitalize }}</div>
+              <div class="meta"><span>{{ item.date | date: '%B %d, %Y' }}</span></div>
+              {% assign ex = item.summary | default: item.excerpt %}
+              {% if ex %}<div class="card-excerpt">{{ ex }}</div>{% endif %}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <p class="muted"><a href="{{ '/search/?q=' | append: (tags_str | split: ',' | first) | relative_url }}">View all</a></p>
+  </section>
+  {% endif %}
+{% endfor %}
+

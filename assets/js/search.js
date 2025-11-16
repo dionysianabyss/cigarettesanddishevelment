@@ -33,6 +33,12 @@
     const results = $('#search-results');
     if (!input || !results) return;
     const base = (window.SITE && window.SITE.baseurl) ? window.SITE.baseurl : '';
+    // Pre-fill from URL param ?q=...
+    try {
+      const u = new URL(window.location.href);
+      const qp = u.searchParams.get('q');
+      if (qp) { input.value = qp; }
+    } catch (_) {}
     fetch(base + '/search.json')
       .then(r => r.json())
       .then(data => {

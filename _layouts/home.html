@@ -13,7 +13,7 @@ layout: default
 </section>
 
 <section class="container">
-  <h3 class="section-title">Latest Essays</h3>
+  <h3 class="section-title">From My Studies</h3>
   <div class="grid">
     {% assign essays = site.essays | where_exp: 'i','i.published != false' | sort: 'date' | reverse | slice: 0, 3 %}
     {% for e in essays %}

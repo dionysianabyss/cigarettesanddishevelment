@@ -41,6 +41,9 @@ collections:
   archetypes:
     output: true
     permalink: /archetypes/:name/
+  anti_archetypes:
+    output: true
+    permalink: /anti-archetypes/:name/
 
 defaults:
   - scope:
@@ -81,6 +84,11 @@ defaults:
   - scope:
       path: ""
       type: archetypes
+    values:
+      layout: archetype
+  - scope:
+      path: ""
+      type: anti_archetypes
     values:
       layout: archetype
 

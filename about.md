@@ -17,9 +17,9 @@ This project is, in spirit, a dossier of lucidity and devotion—my own mausoleu
 
 Navigation
 
-- Use the top navigation to browse Essays, Posts, Books, and Concepts.
+- Use the top navigation to browse My Studies, My Archetypes, My Anti-Archetypes.
 - Try the Search button (or the search page) to find anything quickly.
-- Values & Archetypes outlines the animating principles and recurring voices.
+- My Archetypes outlines the animating principles and recurring voices.
+- My Anti-Archetypes names the postures that oppose that work.
 
 If you are here, welcome. Take your time.
-

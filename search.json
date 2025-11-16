@@ -10,10 +10,12 @@ permalink: /search.json
   {%- assign books = site.books -%}
   {%- assign concepts = site.concepts -%}
   {%- assign values = site.values -%}
+  {%- assign archetypes = site.archetypes -%}
+  {%- assign anti = site.anti_archetypes -%}
   {%- assign authors = site.authors -%}
   {%- assign pages_all = site.pages -%}
   {%- assign pages = pages_all | where_exp:'p','p.search_exclude != true and p.url != "/" and p.url != "/search/"' -%}
-  {%- assign collections = essays | concat: journal | concat: books | concat: concepts | concat: values | concat: authors | concat: pages -%}
+  {%- assign collections = essays | concat: journal | concat: books | concat: concepts | concat: values | concat: archetypes | concat: anti | concat: authors | concat: pages -%}
   {%- for p in collections -%}
     {
       "title": {{ p.name | default: p.title | default: p.concept | default: p.system_name | default: p.slug | jsonify }},
