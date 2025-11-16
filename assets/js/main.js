@@ -31,7 +31,8 @@
     }
 
     // Rotate taglines on home/any page
-    const el = document.getElementById('rotating-tagline');
+    let el = document.getElementById('rotating-tagline');
+    if (!el) el = document.getElementById('hero-tagline');
     if (el) {
       let taglines = [];
       if (Array.isArray(window.CANON_TAGLINES) && window.CANON_TAGLINES.length) {

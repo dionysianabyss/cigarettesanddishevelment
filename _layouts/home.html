@@ -1,35 +1,30 @@
 ---
 layout: default
 ---
-<section class="hero hero-full">
+<section class="hero hero-full hero-split">
   <div class="hero-overlay" aria-hidden="true"></div>
   <canvas id="fog-canvas" class="fog" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;"></canvas>
-  <div class="container hero-inner">
+  <div class="container hero-inner hero-grid">
     <div class="hero-copy">
       <h1 class="title">{{ site.title }}</h1>
       <div class="subtitle">{{ site.description }}</div>
-      <div id="rotating-tagline" class="tagline" data-taglines="{{ page.taglines | jsonify | escape }}">{{ page.taglines | first }}</div>
       <div class="accent-line" aria-hidden="true"></div>
+      <div class="tagline-wrap"><span id="hero-tagline">{{ page.taglines | first }}</span></div>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="{{ '/studies/' | relative_url }}">Enter the Mausoleum</a>
         <a class="btn btn-ghost" href="{{ '/values/' | relative_url }}">Meet My Archetypes</a>
       </div>
     </div>
+    <div class="hero-media noir-placeholder-hero" aria-hidden="true"></div>
   </div>
 </section>
 
-<section class="noir-image-strip" aria-label="Mood gallery">
-  {% assign imgs = site.static_files | where_exp: 'f', "f.path contains '/assets/uploads/'" %}
-  {% assign picks = imgs | slice: 0, 6 %}
-  {% if picks and picks != empty %}
-    {% for f in picks %}
-      <div class="noir-image" style="background-image:url('{{ f.path | relative_url }}')"></div>
-    {% endfor %}
-  {% else %}
-    {% for i in (1..6) %}
-      <div class="noir-image" style="background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));"></div>
-    {% endfor %}
-  {% endif %}
+<section class="image-strip" aria-label="Mood gallery">
+  <div class="image ph-1"></div>
+  <div class="image ph-2"></div>
+  <div class="image ph-3"></div>
+  <div class="image ph-4"></div>
+  <div class="image ph-5"></div>
 </section>
 
 <section class="statement">

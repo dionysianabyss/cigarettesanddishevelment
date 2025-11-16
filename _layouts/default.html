@@ -6,7 +6,16 @@
   <body>
     <div class="grain-layer" aria-hidden="true"></div>
     {% include header.html %}
-    <main class="container content wikicontent">
+    <main class="container content wikicontent page">
+      {% if page.layout != 'home' and page.page_header != false %}
+        {% assign pt = page.name | default: page.title | default: page.system_name %}
+        {% if pt %}
+        <header class="page-header">
+          <h1 class="page-title">{{ pt }}</h1>
+          {% if page.subtitle %}<p class="muted">{{ page.subtitle }}</p>{% elsif page.description %}<p class="muted">{{ page.description }}</p>{% endif %}
+        </header>
+        {% endif %}
+      {% endif %}
       {{ content }}
     </main>
     <!-- Search Overlay -->
