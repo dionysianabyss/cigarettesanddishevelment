@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Welcome to Cigarettes and Dishevelment
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+This is a freshly installed and initiated site... this morning... therefore it has... nothing.
