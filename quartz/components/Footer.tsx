@@ -14,7 +14,6 @@ export default ((opts?: Options) => {
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>
-          <p>
   Made by Mjollnir Aurelius © {year}
         </p>
         <ul>
